@@ -1,0 +1,28 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:AvaloniaControls.Controls">
+    <Design.PreviewWith>
+        <controls:HeaderFooter />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|HeaderFooter">
+        
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Margin="{TemplateBinding Margin}">
+                   
+                    <Border BorderBrush="{DynamicResource CardBorderColor}"
+                            BorderThickness="{TemplateBinding BorderSize}"
+                            Background="{DynamicResource CardBackgroundColor}"
+                    >
+                        <ContentPresenter Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}"></ContentPresenter>
+                    </Border>
+                </StackPanel>
+                
+            </ControlTemplate>
+            
+        </Setter>
+    </Style>
+    
+</Styles>

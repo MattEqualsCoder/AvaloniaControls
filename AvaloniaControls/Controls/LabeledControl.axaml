@@ -1,0 +1,50 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="https://github.com/projektanker/icons.avalonia"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:controls="clr-namespace:AvaloniaControls.Controls">
+    <Design.PreviewWith>
+        <controls:LabeledControl />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|LabeledControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid HorizontalAlignment="Stretch" Margin="0 0 0 3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="LabelColumn"
+                                          Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal" 
+                                Grid.Column="0"
+                                VerticalAlignment="Top"
+                                Margin="0 0 10 0">
+                            <Label x:Name="Label"
+                                   Margin="0 2 0 0"
+                                           Grid.Column="0"
+                                           Content="{TemplateBinding Text}"/>
+                            
+                            <avalonia:MaterialIcon 
+                                Kind="Information"
+                                ToolTip.Tip="{TemplateBinding Hint}"
+                                IsVisible="{TemplateBinding DisplayHint}"
+                                Width="10" Height="10"
+                            ></avalonia:MaterialIcon>
+                            
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <ContentPresenter Content="{TemplateBinding Content}"/>    
+                    </StackPanel>
+                    
+            </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

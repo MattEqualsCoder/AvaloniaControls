@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:AvaloniaControls.Models"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
+        x:Class="AvaloniaControls.Controls.MessageWindow"
+        Width="400"
+        SizeToContent="Height"
+        CanResize="False"
+        Title="{Binding WindowTitle}"
+        x:DataType="models:MessageWindowRequest">
+    <LayoutTransformControl x:Name="MainLayout">
+        <DockPanel>
+            
+            <Border DockPanel.Dock="Bottom" Padding="10 0 10 10">
+                <StackPanel Orientation="Vertical">
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="Button1" Click="Button1_OnClick" Margin="5 0" Content="{Binding FirstButtonText}" />
+                        <Button Name="Button2" Click="Button2_OnClick" Margin="5 0" Content="{Binding SecondButtonText}" IsVisible="{Binding IsSecondButtonVisible}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            
+            <Border DockPanel.Dock="Left" Padding="20" IsVisible="{Binding IsIconVisible}">
+                <avalonia:MaterialIcon Kind="{Binding MaterialIconKind}" Height="50" Width="50" />    
+            </Border>
+            
+            <StackPanel Orientation="Vertical" Margin="10" >
+                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Message}" />
+                <TextBox Name="ResponseTextBox" Margin="0 10 0 0 " IsVisible="{Binding DisplayTextBox}" />
+                <CheckBox Name="ResponseCheckBox" IsVisible="{Binding IsCheckBoxVisible}" Margin="0 30 0 10" Content="{Binding CheckBoxText}" />
+            </StackPanel>
+        </DockPanel>
+    </LayoutTransformControl>
+</Window>

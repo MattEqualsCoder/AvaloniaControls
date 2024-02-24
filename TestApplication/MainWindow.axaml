@@ -1,0 +1,98 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:AvaloniaControls.Controls;assembly=AvaloniaControls"
+        xmlns:tools="clr-namespace:AvaloniaControls.Converters;assembly=AvaloniaControls"
+        xmlns:testApplication="clr-namespace:TestApplication"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+        x:Class="TestApplication.MainWindow"
+        Icon="MSUScripterIcon.ico"
+        x:DataType="testApplication:TestViewModel"
+        Title="TestApplication">
+    <LayoutTransformControl x:Name="MainLayout">
+        <DockPanel>
+            <controls:HeaderFooter DockPanel.Dock="Bottom">
+                <TextBlock>Test</TextBlock>
+            </controls:HeaderFooter>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    
+                    <controls:CardControl HeaderText="Card" DisplayHeaderButtons="True" Padding="10">
+                        <controls:CardControl.HeaderButtons>
+                            <Button Click="ButtonConvert_OnClick">Button!</Button>
+                        </controls:CardControl.HeaderButtons>
+                        <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
+                            <TextBlock>Card Content</TextBlock>
+                            
+                            <controls:LabeledControl Text="Labeled Control" Hint="Hint text!" DisplayHint="True">
+                                <TextBox Watermark="TextBox"></TextBox>
+                            </controls:LabeledControl>
+                            <controls:LabeledControl Text="File Control">
+                                <controls:FileControl OnUpdated="FileControl_OnOnUpdated" FilePath="{Binding TestPath}">
+                                </controls:FileControl>
+                            </controls:LabeledControl>
+                            
+                            <controls:LabeledControl Text="Folder Control">
+                                <controls:FileControl OnUpdated="FileControl_OnOnUpdated" FileInputType="Folder" FilePath="{Binding TestFolderPath}">
+                                </controls:FileControl>
+                            </controls:LabeledControl>
+                            
+                            <controls:LinkControl Click="Button_OnClick">Open Basic Message Box</controls:LinkControl>
+                            
+                            <controls:LinkControl Click="Button2_OnClick">Open Large Message Box</controls:LinkControl>
+                            
+                            <controls:LinkControl Click="Button3_OnClick">Open CheckBox Message Box</controls:LinkControl>
+                            
+                            <controls:LinkControl Click="Button4_OnClick">Open TextBox Message Box</controls:LinkControl>
+                            
+                            <TextBlock Margin="0 10 0 0">Bool ComboBox</TextBlock>
+                            <ComboBox 
+                                SelectedItem="{Binding Boolean, Converter={StaticResource BoolToStringConverter}}"
+                                ItemsSource="{x:Static tools:BoolToStringConverter.ItemsSource}"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                            ></ComboBox>
+                            
+                            <TextBlock Margin="0 10 0 0">Nullable Bool ComboBox</TextBlock>
+                            <ComboBox 
+                                SelectedItem="{Binding NullableBoolean, Converter={StaticResource NullableBoolToStringConverter}}"
+                                ItemsSource="{x:Static tools:NullableBoolToStringConverter.ItemsSource}"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                            ></ComboBox>
+                            
+                            <TextBlock Margin="0 10 0 0">Enum ComboBox</TextBlock>
+                            <controls:EnumComboBox 
+                                EnumType="{Binding TestEnum, Converter={StaticResource TypeConverter}}"
+                                Value="{Binding TestEnum, Mode=TwoWay}"
+                                DescriptionAction="{Binding TestFunction}"
+                                ValueChanged="EnumComboBox_OnValueChanged"
+                            >
+                                
+                            </controls:EnumComboBox>
+                            
+                            <Button Name="EnumComboBoxText" Click="EnumComboBoxText_OnClick">Test Enum Value</Button>
+                            
+                            <TextBlock>HI!</TextBlock>
+                            
+                            <controls:ImageButton HorizontalAlignment="Left">
+                                <avalonia:MaterialIcon Kind="Wardrobe" Width="50" Height="50"></avalonia:MaterialIcon>
+                            </controls:ImageButton>
+                            
+                            <testApplication:TestServiceControl></testApplication:TestServiceControl>
+                            
+                            <ListBox ItemsSource="{Binding ListBoxItems}"></ListBox>
+                            
+                            <Slider Value="{Binding DoubleValue}" Minimum="0" Maximum="5"></Slider>
+                            <TextBox Text="{Binding DoubleValue}"></TextBox>
+                            
+                        </StackPanel>
+                    </controls:CardControl>
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </LayoutTransformControl>
+</Window>
