@@ -10,7 +10,10 @@ public class MessageWindowRequest
     public MessageWindowButtons Buttons { get; init; }
     public bool DisplayTextBox { get; init; }
     public string? CheckBoxText { get; init; }
-
+    public string? LinkText { get; init; }
+    public string? LinkUrl { get; set; }
+    public bool DisplayLink => !string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkUrl);
+    
     public string WindowTitle
     {
         get

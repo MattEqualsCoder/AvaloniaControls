@@ -16,7 +16,11 @@ public partial class MessageWindow : ScalableWindow
         InitializeComponent();
         DataContext = new MessageWindowRequest()
         {
-            Message = "Unknown"
+            Message = "Unknown",
+            LinkText = "Hi",
+            LinkUrl = "Hello",
+            CheckBoxText = "Testing!",
+            Icon = MessageWindowIcon.Info
         };
     }
 
@@ -78,5 +82,22 @@ public partial class MessageWindow : ScalableWindow
             ResponseText = this.FindControl<TextBox>(nameof(ResponseTextBox))?.Text
         };
         Close(DialogResult);
+    }
+
+    private void ResponseLink_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is not MessageWindowRequest request || string.IsNullOrEmpty(request.LinkUrl))
+        {
+            return;
+        }
+
+        if (request.LinkUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        {
+            CrossPlatformTools.OpenUrl(request.LinkUrl);
+        }
+        else
+        {
+            CrossPlatformTools.OpenDirectory(request.LinkUrl);
+        }
     }
 }

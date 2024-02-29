@@ -1,3 +1,4 @@
+using Avalonia.Controls;
 using AvaloniaControls.Models;
 
 namespace AvaloniaControls.Controls;
@@ -6,12 +7,21 @@ public class ExceptionWindow : MessageWindow
 {
     public static string GitHubUrl { get; set; } = "";
     public static string LogPath { get; set; } = "";
+    
+    public static Window? ParentWindow { get; set; }
 
     public ExceptionWindow()
     {
         var canOpenFolder = !string.IsNullOrWhiteSpace(LogPath);
         var canOpenGitHub = !string.IsNullOrWhiteSpace(GitHubUrl);
         var canPerformAction = canOpenFolder || canOpenGitHub;
+
+        Owner = ParentWindow;
+
+        if (ParentWindow != null)
+        {
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        }
             
         Closing += (sender, args) =>
         {

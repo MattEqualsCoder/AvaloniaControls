@@ -18,6 +18,8 @@
         <entry key="AvaloniaControls/Themes/Light.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="AvaloniaControls/Themes/Resources.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="AvaloniaControls/Themes/Themes.axaml" value="TestApplication/TestApplication.csproj" />
+        <entry key="ReactiveTestApp/App.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
+        <entry key="ReactiveTestApp/Views/MainWindow.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="TestApplication/App.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="TestApplication/MainWindow.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="TestApplication/TestServiceControl.axaml" value="TestApplication/TestApplication.csproj" />

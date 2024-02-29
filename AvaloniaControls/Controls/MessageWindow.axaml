@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:models="clr-namespace:AvaloniaControls.Models"
         xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:controls="clr-namespace:AvaloniaControls.Controls"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
         x:Class="AvaloniaControls.Controls.MessageWindow"
         Width="400"
@@ -29,9 +30,21 @@
             </Border>
             
             <StackPanel Orientation="Vertical" Margin="10" >
-                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Message}" />
-                <TextBox Name="ResponseTextBox" Margin="0 10 0 0 " IsVisible="{Binding DisplayTextBox}" />
-                <CheckBox Name="ResponseCheckBox" IsVisible="{Binding IsCheckBoxVisible}" Margin="0 30 0 10" Content="{Binding CheckBoxText}" />
+                <TextBlock VerticalAlignment="Center" 
+                           TextWrapping="Wrap" 
+                           Text="{Binding Message}" />
+                <controls:LinkControl Name="ResponseLink"
+                                      Content="{Binding LinkText}"
+                                      IsVisible="{Binding DisplayLink}"
+                                      Margin="0 10 0 10" 
+                                      Click="ResponseLink_OnClick"/>
+                <TextBox Name="ResponseTextBox" 
+                         Margin="0 5 0 5" 
+                         IsVisible="{Binding DisplayTextBox}" />
+                <CheckBox Name="ResponseCheckBox" 
+                          IsVisible="{Binding IsCheckBoxVisible}" 
+                          Margin="0 5 0 5" 
+                          Content="{Binding CheckBoxText}" />
             </StackPanel>
         </DockPanel>
     </LayoutTransformControl>

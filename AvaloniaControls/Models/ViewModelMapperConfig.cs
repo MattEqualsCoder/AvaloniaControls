@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using ReactiveUI;
 
 namespace AvaloniaControls.Models;
 
@@ -9,7 +10,7 @@ public class ViewModelMapperConfig<TAssembly> : Profile
     public ViewModelMapperConfig()
     {
         var viewModels = typeof(TAssembly).Assembly.GetTypes()
-            .Where(t => t.IsSubclassOf(typeof(BaseViewModel)));
+            .Where(t => t.IsSubclassOf(typeof(ReactiveObject)));
         
         foreach (var viewModel in viewModels)
         {
