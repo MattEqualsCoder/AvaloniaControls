@@ -10,10 +10,10 @@ namespace AvaloniaControls.Controls;
 
 public partial class EnumComboBox : UserControl
 {
-    private ICollection<string> _names = new List<string>();
-    private Dictionary<string, object?> _nameValues = new();
-    private Dictionary<object, string> _valueDescriptions = new();
-    private ComboBox _mainComboBox;
+    private readonly ICollection<string> _names = new List<string>();
+    private readonly Dictionary<string, object?> _nameValues = new();
+    private readonly Dictionary<object, string> _valueDescriptions = new();
+    private readonly ComboBox _mainComboBox;
     
     public EnumComboBox()
     {
@@ -60,7 +60,7 @@ public partial class EnumComboBox : UserControl
     
     public static readonly StyledProperty<Func<string, string>?> DescriptionActionProperty = AvaloniaProperty.Register<EnumComboBox, Func<string, string>?>(
         nameof(Value));
-
+    
     public Func<string, string>? DescriptionAction
     {
         get => GetValue(DescriptionActionProperty);
@@ -73,6 +73,15 @@ public partial class EnumComboBox : UserControl
             }
         }
     }
+    
+    public static readonly StyledProperty<Func<Enum?, bool>?> FilterProperty = AvaloniaProperty.Register<EnumComboBox, Func<Enum?, bool>?>(
+        nameof(Value));
+    
+    public Func<Enum?, bool>? Filter
+    {
+        get => GetValue(FilterProperty);
+        set =>SetValue(FilterProperty, value);
+    }
 
     private void PopulateValues(Type? type)
     {
@@ -83,6 +92,11 @@ public partial class EnumComboBox : UserControl
         
         foreach (var enumValue in Enum.GetValues(type))
         {
+            if (Filter != null && Filter.Invoke(enumValue as Enum) != true)
+            {
+                continue;
+            }
+                
             var description = ((Enum)enumValue).GetDescription();
             if (DescriptionAction != null)
             {

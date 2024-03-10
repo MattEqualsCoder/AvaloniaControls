@@ -1,8 +1,11 @@
+using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using AvaloniaControls;
 using AvaloniaControls.Controls;
+using AvaloniaControls.Extensions;
 using AvaloniaControls.Models;
 using AvaloniaControls.Services;
 using ReactiveTestApp.Services;
@@ -23,8 +26,9 @@ public partial class MainWindow : RestorableWindow
             DataContext = _model;
             return;
         }
-        _service = IControlServiceFactory.GetControlService<MainWindowService>();
-        DataContext = _service.InitializeModel();
+
+        _service = this.GetControlService<MainWindowService>();
+        DataContext = _service?.InitializeModel();
     }
 
     protected override string RestoreFilePath => "test.json";

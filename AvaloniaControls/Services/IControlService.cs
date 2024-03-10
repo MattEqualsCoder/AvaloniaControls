@@ -1,6 +1,8 @@
+using Avalonia.Controls;
+
 namespace AvaloniaControls.ControlServices;
 
-public interface IControlService
+public abstract class ControlService
 {
-    
+    public Control? ParentControl { get; set; }
 }

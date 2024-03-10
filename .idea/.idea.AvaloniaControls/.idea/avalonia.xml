@@ -5,8 +5,8 @@
       <map>
         <entry key="AvaloniaControls/App.axaml" value="AvaloniaControls/AvaloniaControls.csproj" />
         <entry key="AvaloniaControls/Controls/CardControl.axaml" value="TestApplication/TestApplication.csproj" />
-        <entry key="AvaloniaControls/Controls/EnumComboBox.axaml" value="TestApplication/TestApplication.csproj" />
-        <entry key="AvaloniaControls/Controls/FileControl.axaml" value="TestApplication/TestApplication.csproj" />
+        <entry key="AvaloniaControls/Controls/EnumComboBox.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
+        <entry key="AvaloniaControls/Controls/FileControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/HeaderFooter.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="AvaloniaControls/Controls/ImageButton.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="AvaloniaControls/Controls/LabeledControl.axaml" value="TestApplication/TestApplication.csproj" />
@@ -16,8 +16,8 @@
         <entry key="AvaloniaControls/MainWindow.axaml" value="AvaloniaControls/AvaloniaControls.csproj" />
         <entry key="AvaloniaControls/Themes/Dark.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="AvaloniaControls/Themes/Light.axaml" value="TestApplication/TestApplication.csproj" />
-        <entry key="AvaloniaControls/Themes/Resources.axaml" value="TestApplication/TestApplication.csproj" />
-        <entry key="AvaloniaControls/Themes/Themes.axaml" value="TestApplication/TestApplication.csproj" />
+        <entry key="AvaloniaControls/Themes/Resources.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
+        <entry key="AvaloniaControls/Themes/Themes.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="ReactiveTestApp/App.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="ReactiveTestApp/Views/MainWindow.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="TestApplication/App.axaml" value="TestApplication/TestApplication.csproj" />

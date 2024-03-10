@@ -12,6 +12,7 @@
                  Text="{Binding ElementName=MyFileControl, Path=FilePath}"
                  IsReadOnly="True" 
                  IsEnabled="True"
+                 IsVisible="{Binding ElementName=MyFileControl, Path=ShowTextBox}" 
                  Watermark="{Binding ElementName=MyFileControl, Path=Watermark}"
         />
         

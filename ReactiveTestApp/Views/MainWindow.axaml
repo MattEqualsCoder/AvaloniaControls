@@ -81,6 +81,15 @@
                             </controls:EnumComboBox>
                         </controls:LabeledControl>
                         
+                        <controls:LabeledControl Text="Enum ComboBox">
+                            <controls:EnumComboBox 
+                                EnumType="{Binding TestEnum2, Converter={StaticResource TypeConverter}}"
+                                Value="{Binding TestEnum2, Mode=TwoWay}"
+                                Filter="{Binding FilterEnum}"
+                            >
+                            </controls:EnumComboBox>
+                        </controls:LabeledControl>
+                        
                         <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
                             <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                             

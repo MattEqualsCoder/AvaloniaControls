@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using AutoMapper;
@@ -9,7 +8,7 @@ using ReactiveTestApp.ViewModels;
 
 namespace ReactiveTestApp.Services;
 
-public class MainWindowService(ILogger<MainWindowService> logger, IMapper mapper) : IControlService
+public class MainWindowService(ILogger<MainWindowService> logger, IMapper mapper) : ControlService
 {
     public MainWindowViewModel Model { get; set; } = new();
 

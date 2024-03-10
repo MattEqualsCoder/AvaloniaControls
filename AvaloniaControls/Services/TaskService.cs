@@ -38,6 +38,26 @@ public class TaskService : ITaskService
                 TaskContinuationOptions.OnlyOnFaulted);
     }
 
+    public Task RunTask(Func<Task?> function)
+    {
+        return Task.Factory.StartNew(function)
+            .ContinueWith((t) =>
+                {
+                    ShowExceptionWindow(t.Exception);
+                },
+                TaskContinuationOptions.OnlyOnFaulted);
+    }
+
+    public Task RunTask(Func<Task?> function, CancellationToken token)
+    {
+        return Task.Factory.StartNew(function, token)
+            .ContinueWith((t) =>
+                {
+                    ShowExceptionWindow(t.Exception);
+                },
+                TaskContinuationOptions.OnlyOnFaulted);
+    }
+
     private void ShowExceptionWindow(Exception? ex = null)
     {
         if (ex != null)

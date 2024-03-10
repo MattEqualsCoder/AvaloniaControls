@@ -25,6 +25,8 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public bool? NullableBoolean { get; set; }
     
     [Reactive] public TestEnums TestEnum { get; set; }
+    
+    [Reactive] public TestEnums TestEnum2 { get; set; }
 
     [Reactive]
     [ReactiveLinkedProperties(nameof(MessageBoxResultDisplayText))]
@@ -33,6 +35,8 @@ public class MainWindowViewModel : ViewModelBase
     public string MessageBoxResultDisplayText => $"Message Box Result: {MessageBoxResult ?? "N/A"}";
     
     public Func<string, string>? UpdateEnumDescription => s => s + " Updated";
+
+    public Func<Enum?, bool> FilterEnum => a => a != null && (TestEnums)a is TestEnums.ValueOne or TestEnums.ValueTwo;
 }
 
 public enum TestEnums

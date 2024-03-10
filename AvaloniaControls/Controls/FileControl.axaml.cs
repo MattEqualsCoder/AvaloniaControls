@@ -56,6 +56,15 @@ public partial class FileControl : UserControl
         get => GetValue(ShowClearButtonProperty);
         set => SetValue(ShowClearButtonProperty, value);
     }
+    
+    public static readonly StyledProperty<bool> ShowTextBoxProperty = AvaloniaProperty.Register<FileControl, bool>(
+        "ShowTextBox", true);
+
+    public bool ShowTextBox
+    {
+        get => GetValue(ShowTextBoxProperty);
+        set => SetValue(ShowTextBoxProperty, value);
+    }
 
     public static readonly StyledProperty<FileInputControlType> FileInputTypeProperty = AvaloniaProperty.Register<FileControl, FileInputControlType>(
         "FileInputType");

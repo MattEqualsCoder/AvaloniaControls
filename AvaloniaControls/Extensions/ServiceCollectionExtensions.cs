@@ -1,5 +1,4 @@
 using System.Linq;
-using AvaloniaControls.ControlServices;
 using AvaloniaControls.Models;
 using AvaloniaControls.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,11 +11,12 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddControlServices<TAssembly>(this IServiceCollection services)
     {
         var controlServices = typeof(TAssembly).Assembly.GetTypes()
-            .Where(t => t.GetInterfaces().Contains(typeof(IControlService)));
+            .Where(t => t.BaseType?.Name.StartsWith("ControlService") == true);
         
         foreach (var service in controlServices)
         {
             services.TryAddTransient(service);
+            IControlServiceFactory.ControlServiceDictionary[service.Name] = service;
         }
 
         services.AddSingleton<ControlServiceFactory>();
