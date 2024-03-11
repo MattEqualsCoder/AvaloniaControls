@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -109,9 +110,13 @@ public partial class EnumComboBox : UserControl
 
         _mainComboBox.ItemsSource = _names;
 
-        if (Value != null)
+        if (Value != null && _valueDescriptions.TryGetValue(Value, out var value))
         {
-            _mainComboBox.SelectedValue = _valueDescriptions[Value];    
+            _mainComboBox.SelectedValue = value;    
+        }
+        else
+        {
+            _mainComboBox.SelectedValue = _names.First();
         }
     }
 

@@ -25,8 +25,8 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public bool? NullableBoolean { get; set; }
     
     [Reactive] public TestEnums TestEnum { get; set; }
-    
-    [Reactive] public TestEnums TestEnum2 { get; set; }
+
+    [Reactive] public TestEnums TestEnum2 { get; set; } = TestEnums.ValueThree;
 
     [Reactive]
     [ReactiveLinkedProperties(nameof(MessageBoxResultDisplayText))]
