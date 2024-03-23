@@ -45,4 +45,12 @@
         </Style>
     </Style>
     
+    <Style Selector="TabItem">
+        <Setter Property="Margin" Value="0 0 5 5"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TabTextColor}"></Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </Style>
+    
 </Styles>

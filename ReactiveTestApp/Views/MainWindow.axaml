@@ -20,98 +20,104 @@
     
     <LayoutTransformControl x:Name="MainLayout">
         
-        <DockPanel>
-            <controls:HeaderFooter DockPanel.Dock="Bottom" Padding="5">
-                <Grid ColumnDefinitions="Auto,*">
-                    <TextBlock Grid.Column="0" Margin="0 0 5 0" VerticalAlignment="Center">Scale: </TextBlock>
-                    <Slider Grid.Column="1" VerticalAlignment="Center" Value="{Binding Scale}" Minimum="1" Maximum="3" ValueChanged="RangeBase_OnValueChanged"></Slider>
-                </Grid>
-            </controls:HeaderFooter>
-            <ScrollViewer>
-                <controls:CardControl Margin="5" HeaderText="Card Control with Header" DisplayHeaderButtons="True" Padding="5">
-                    <controls:CardControl.HeaderButtons>
-                        <StackPanel Orientation="Horizontal">
-                            <controls:ImageButton Click="IconButton_OnClick">
-                                <avalonia:MaterialIcon Kind="Usb" Width="20" Height="20" Background="Transparent"></avalonia:MaterialIcon>
-                            </controls:ImageButton>
-                            <Button Click="HeaderButton_OnClick">Button!</Button>    
-                        </StackPanel>
-                        
-                    </controls:CardControl.HeaderButtons>
-                    <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
-                        
-                        <controls:LabeledControl Text="Labeled Control" Hint="Hint text!" DisplayHint="True">
-                            <TextBox Watermark="TextBox"></TextBox>
-                        </controls:LabeledControl>
-                        
-                        <controls:LabeledControl Text="File Control">
-                            <controls:FileControl OnUpdated="FileControl_OnOnUpdated" Filter="Text Files:*.txt,*.log" FilePath="{Binding TestPath}">
-                            </controls:FileControl>
-                        </controls:LabeledControl>
-                        
-                        <controls:LabeledControl Text="Folder Control">
-                            <controls:FileControl OnUpdated="FileControl_OnOnUpdated" FileInputType="Folder" FilePath="{Binding FolderPath}">
-                            </controls:FileControl>
-                        </controls:LabeledControl>
-                        
-                        <controls:LabeledControl Text="Bool ComboBox">
-                            <ComboBox 
-                                SelectedItem="{Binding Boolean, Converter={StaticResource BoolToStringConverter}}"
-                                ItemsSource="{x:Static tools:BoolToStringConverter.ItemsSource}"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Stretch"
-                            ></ComboBox>
-                        </controls:LabeledControl>
-                            
-                        <controls:LabeledControl Text="Nullable Bool ComboBox">
-                            <ComboBox 
-                                SelectedItem="{Binding NullableBoolean, Converter={StaticResource NullableBoolToStringConverter}}"
-                                ItemsSource="{x:Static tools:NullableBoolToStringConverter.ItemsSource}"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Stretch"
-                            ></ComboBox>
-                        </controls:LabeledControl>
-                            
-                        <controls:LabeledControl Text="Enum ComboBox">
-                            <controls:EnumComboBox 
-                                EnumType="{Binding TestEnum, Converter={StaticResource TypeConverter}}"
-                                Value="{Binding TestEnum, Mode=TwoWay}"
-                                DescriptionAction="{Binding UpdateEnumDescription}"
-                            >
-                            </controls:EnumComboBox>
-                        </controls:LabeledControl>
-                        
-                        <controls:LabeledControl Text="Enum ComboBox">
-                            <controls:EnumComboBox 
-                                EnumType="{Binding TestEnum2, Converter={StaticResource TypeConverter}}"
-                                Value="{Binding TestEnum2, Mode=TwoWay}"
-                                Filter="{Binding FilterEnum}"
-                            >
-                            </controls:EnumComboBox>
-                        </controls:LabeledControl>
-                        
-                        <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
-                            <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
-                            
-                            <controls:LinkControl Grid.Column="1" Click="LargeMessageBoxButton_OnClick" HorizontalAlignment="Center">Open Large Message Box</controls:LinkControl>
-                            
-                            <controls:LinkControl Grid.Column="2" Click="CheckboxMessageBoxButton_OnClick" HorizontalAlignment="Right">Open CheckBox Message Box</controls:LinkControl>
+        <TabControl>
+            <TabItem Header="Tab One">
+                <DockPanel>
+                    <controls:HeaderFooter DockPanel.Dock="Bottom" Padding="5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <TextBlock Grid.Column="0" Margin="0 0 5 0" VerticalAlignment="Center">Scale: </TextBlock>
+                            <Slider Grid.Column="1" VerticalAlignment="Center" Value="{Binding Scale}" Minimum="1" Maximum="3" ValueChanged="RangeBase_OnValueChanged"></Slider>
                         </Grid>
-                        <TextBlock Text="{Binding MessageBoxResultDisplayText}"></TextBlock>
-                        
-                        <Separator Margin="0 10"></Separator>
-                        
-                        <StackPanel Orientation="Horizontal">
-                            <Button Click="UIExceptionButton_OnClick" Margin="0 0 10 0">Throw UI Exception</Button>
-                            <Button Click="TaskExceptionButton_OnClick" Margin="0 0 10 0">Throw Task Exception</Button>
-                            <Button Click="TestMappingsButton_OnClick">Test Mappings</Button>
-                        </StackPanel>
-                        
-                    </StackPanel>
-                </controls:CardControl>
-            </ScrollViewer>
-        </DockPanel>
-
+                    </controls:HeaderFooter>
+                    <ScrollViewer>
+                        <controls:CardControl Margin="5" HeaderText="Card Control with Header" DisplayHeaderButtons="True" Padding="5">
+                            <controls:CardControl.HeaderButtons>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageButton Click="IconButton_OnClick">
+                                        <avalonia:MaterialIcon Kind="Usb" Width="20" Height="20" Background="Transparent"></avalonia:MaterialIcon>
+                                    </controls:ImageButton>
+                                    <Button Click="HeaderButton_OnClick">Button!</Button>    
+                                </StackPanel>
+                                
+                            </controls:CardControl.HeaderButtons>
+                            <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
+                                
+                                <controls:LabeledControl Text="Labeled Control" Hint="Hint text!" DisplayHint="True">
+                                    <TextBox Watermark="TextBox"></TextBox>
+                                </controls:LabeledControl>
+                                
+                                <controls:LabeledControl Text="File Control">
+                                    <controls:FileControl OnUpdated="FileControl_OnOnUpdated" Filter="Text Files:*.txt,*.log" FilePath="{Binding TestPath}">
+                                    </controls:FileControl>
+                                </controls:LabeledControl>
+                                
+                                <controls:LabeledControl Text="Folder Control">
+                                    <controls:FileControl OnUpdated="FileControl_OnOnUpdated" FileInputType="Folder" FilePath="{Binding FolderPath}">
+                                    </controls:FileControl>
+                                </controls:LabeledControl>
+                                
+                                <controls:LabeledControl Text="Bool ComboBox">
+                                    <ComboBox 
+                                        SelectedItem="{Binding Boolean, Converter={StaticResource BoolToStringConverter}}"
+                                        ItemsSource="{x:Static tools:BoolToStringConverter.ItemsSource}"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Stretch"
+                                    ></ComboBox>
+                                </controls:LabeledControl>
+                                    
+                                <controls:LabeledControl Text="Nullable Bool ComboBox">
+                                    <ComboBox 
+                                        SelectedItem="{Binding NullableBoolean, Converter={StaticResource NullableBoolToStringConverter}}"
+                                        ItemsSource="{x:Static tools:NullableBoolToStringConverter.ItemsSource}"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Stretch"
+                                    ></ComboBox>
+                                </controls:LabeledControl>
+                                    
+                                <controls:LabeledControl Text="Enum ComboBox">
+                                    <controls:EnumComboBox 
+                                        EnumType="{Binding TestEnum, Converter={StaticResource TypeConverter}}"
+                                        Value="{Binding TestEnum, Mode=TwoWay}"
+                                        DescriptionAction="{Binding UpdateEnumDescription}"
+                                    >
+                                    </controls:EnumComboBox>
+                                </controls:LabeledControl>
+                                
+                                <controls:LabeledControl Text="Enum ComboBox">
+                                    <controls:EnumComboBox 
+                                        EnumType="{Binding TestEnum2, Converter={StaticResource TypeConverter}}"
+                                        Value="{Binding TestEnum2, Mode=TwoWay}"
+                                        Filter="{Binding FilterEnum}"
+                                    >
+                                    </controls:EnumComboBox>
+                                </controls:LabeledControl>
+                                
+                                <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
+                                    <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
+                                    
+                                    <controls:LinkControl Grid.Column="1" Click="LargeMessageBoxButton_OnClick" HorizontalAlignment="Center">Open Large Message Box</controls:LinkControl>
+                                    
+                                    <controls:LinkControl Grid.Column="2" Click="CheckboxMessageBoxButton_OnClick" HorizontalAlignment="Right">Open CheckBox Message Box</controls:LinkControl>
+                                </Grid>
+                                <TextBlock Text="{Binding MessageBoxResultDisplayText}"></TextBlock>
+                                
+                                <Separator Margin="0 10"></Separator>
+                                
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Click="UIExceptionButton_OnClick" Margin="0 0 10 0">Throw UI Exception</Button>
+                                    <Button Click="TaskExceptionButton_OnClick" Margin="0 0 10 0">Throw Task Exception</Button>
+                                    <Button Click="TestMappingsButton_OnClick">Test Mappings</Button>
+                                </StackPanel>
+                                
+                            </StackPanel>
+                        </controls:CardControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Tab Two">
+                <TextBlock>testing</TextBlock>
+            </TabItem>
+        </TabControl>
         
     
     </LayoutTransformControl>

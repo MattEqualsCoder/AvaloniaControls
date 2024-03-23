@@ -14,6 +14,9 @@
     <Color x:Key="FadedTextColor">#8E8E8E</Color>
     <SolidColorBrush x:Key="FadedText" Color="{StaticResource FadedTextColor}"/>
     
+    <Color x:Key="TabTextColor">#CECECE</Color>
+    <SolidColorBrush x:Key="TabText" Color="{StaticResource TabTextColor}"/>
+    
     <Color x:Key="ItemHoverColor">#3E3E3E</Color>
     <SolidColorBrush x:Key="ItemHover" Color="{StaticResource ItemHoverColor}"/>
     
