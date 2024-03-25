@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
+using AvaloniaControls.Models;
 using File = System.IO.File;
 
 namespace AvaloniaControls.Controls;
@@ -134,6 +137,24 @@ public partial class FileControl : UserControl
         get => GetValue(ForceExtensionProperty);
         set => SetValue(ForceExtensionProperty, value);
     }
+    
+    public static readonly StyledProperty<string?> FileValidationHashProperty = AvaloniaProperty.Register<FileControl, string?>(
+        nameof(FileValidationHash), null);
+
+    public string? FileValidationHash
+    {
+        get => GetValue(FileValidationHashProperty);
+        set => SetValue(FileValidationHashProperty, value);
+    }
+    
+    public static readonly StyledProperty<string?> FileValidationHashErrorProperty = AvaloniaProperty.Register<FileControl, string?>(
+        nameof(FileValidationHashError), null);
+
+    public string? FileValidationHashError
+    {
+        get => GetValue(FileValidationHashErrorProperty);
+        set => SetValue(FileValidationHashErrorProperty, value);
+    }
 
     public event EventHandler<FileControlUpdatedEventArgs>? OnUpdated;
 
@@ -214,10 +235,15 @@ public partial class FileControl : UserControl
         {
             return;
         }
-
+        
         if (selectedPath is IStorageFile selectedFile)
         {
             PreviousFolder = (await selectedFile.GetParentAsync())?.TryGetLocalPath();
+            var path = selectedFile.TryGetLocalPath();
+            if (await VerifyHashAsync(path ?? "") == false)
+            {
+                return;
+            }
             FilePath = selectedFile.TryGetLocalPath();
         }
         else if (selectedPath is IStorageFolder selectedFolder)
@@ -253,5 +279,50 @@ public partial class FileControl : UserControl
         }
 
         return false;
+    }
+
+    private async Task<bool> VerifyHashAsync(string file)
+    {
+        if (string.IsNullOrEmpty(FileValidationHash))
+        {
+            return true;
+        }
+        
+        using var md5 = MD5.Create();
+        await using var stream = File.OpenRead(file);
+        var hash = await md5.ComputeHashAsync(stream);
+        var hashString = BitConverter.ToString(hash).Replace("-", "");
+
+        if (FileValidationHash.Equals(hashString, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+        
+        var error = string.IsNullOrEmpty(FileValidationHashError)
+            ? "Selected file does not match expected hash. Do you still want to select the file?"
+            : FileValidationHashError;
+
+        if (ExceptionWindow.ParentWindow == null)
+        {
+            return false;
+        }
+            
+        var result = await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(async() =>
+        {
+            var window = new MessageWindow(new MessageWindowRequest()
+            {
+                Message = error,
+                Icon = MessageWindowIcon.Error,
+                Buttons = MessageWindowButtons.YesNo
+                    
+            });
+                
+            await window.ShowDialog(ExceptionWindow.ParentWindow);
+
+            return window.DialogResult;
+        });
+
+        return result?.PressedAcceptButton == true;
+
     }
 }

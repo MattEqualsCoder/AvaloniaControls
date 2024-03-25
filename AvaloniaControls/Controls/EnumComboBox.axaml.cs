@@ -103,6 +103,12 @@ public partial class EnumComboBox : UserControl
             {
                 description = DescriptionAction.Invoke(description);
             }
+
+            if (_names.Contains(description))
+            {
+                continue;
+            }
+            
             _names.Add(description);
             _nameValues[description] = enumValue;
             _valueDescriptions[enumValue] = description;

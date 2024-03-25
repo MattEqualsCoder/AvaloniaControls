@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -42,7 +43,7 @@ public partial class MessageWindow : ScalableWindow
         ShowDialog(GlobalParentWindow);
     }
     
-    public void ShowDialog(Control control)
+    public Task ShowDialog(Control control)
     {
         while (control is not Window)
         {
@@ -59,7 +60,7 @@ public partial class MessageWindow : ScalableWindow
         var window = control as Window ?? GlobalParentWindow ?? throw new InvalidOperationException("Cannot show dialog without a parent window");
         Icon = window.Icon;
         Owner = window;
-        base.ShowDialog(window);
+        return base.ShowDialog(window);
     }
 
     private void Button1_OnClick(object? sender, RoutedEventArgs e)
