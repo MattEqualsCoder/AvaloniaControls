@@ -302,7 +302,7 @@ public partial class FileControl : UserControl
             ? "Selected file does not match expected hash. Do you still want to select the file?"
             : FileValidationHashError;
 
-        if (ExceptionWindow.ParentWindow == null)
+        if (MessageWindow.GlobalParentWindow == null)
         {
             return false;
         }
@@ -317,7 +317,7 @@ public partial class FileControl : UserControl
                     
             });
                 
-            await window.ShowDialog(ExceptionWindow.ParentWindow);
+            await window.ShowDialog(MessageWindow.GlobalParentWindow);
 
             return window.DialogResult;
         });
