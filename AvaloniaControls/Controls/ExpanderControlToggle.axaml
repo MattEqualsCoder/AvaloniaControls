@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:controls="clr-namespace:AvaloniaControls.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="100"
+             x:Class="AvaloniaControls.Controls.ExpanderControlToggle"
+             x:DataType="controls:ExpanderControlToggle">
+    <Button Background="Transparent" BorderBrush="Transparent" HorizontalContentAlignment="Left" Click="Button_OnClick">
+        <StackPanel Orientation="Horizontal">
+            <avalonia:MaterialIcon Kind="ChevronRightCircleOutline" IsVisible="{Binding !IsContentVisible }" Height="20" Width="20"/>
+            <avalonia:MaterialIcon Kind="ChevronDownCircleOutline" IsVisible="{Binding IsContentVisible }" Height="20" Width="20"/>
+            <TextBlock FontSize="18" Margin="3 2 0 0">Test</TextBlock>
+        </StackPanel>
+    </Button>
+</UserControl>

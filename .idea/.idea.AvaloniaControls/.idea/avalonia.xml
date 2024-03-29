@@ -5,7 +5,9 @@
       <map>
         <entry key="AvaloniaControls/App.axaml" value="AvaloniaControls/AvaloniaControls.csproj" />
         <entry key="AvaloniaControls/Controls/CardControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
+        <entry key="AvaloniaControls/Controls/CardControlToggle.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/EnumComboBox.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
+        <entry key="AvaloniaControls/Controls/ExpanderControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/FileControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/HeaderFooter.axaml" value="TestApplication/TestApplication.csproj" />
         <entry key="AvaloniaControls/Controls/ImageButton.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />

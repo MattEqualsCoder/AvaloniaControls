@@ -6,7 +6,7 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>0.9.9</Version>
+        <Version>0.9.10</Version>
         <PackageId>MattEqualsCoder.AvaloniaControls</PackageId>
         <Title>Avalonia Controls</Title>
         <Authors>MattEqualsCoder</Authors>
@@ -27,5 +27,13 @@
         <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
         <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Compile Update="Controls\ExpanderControl.axaml.cs">
+        <DependentUpon>ExpanderControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

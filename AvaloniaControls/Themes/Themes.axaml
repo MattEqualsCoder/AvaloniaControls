@@ -12,6 +12,7 @@
     </Styles.Resources>
     <avalonia:MaterialIconStyles />
     <StyleInclude Source="../Controls/CardControl.axaml"></StyleInclude>
+    <StyleInclude Source="../Controls/ExpanderControl.axaml"></StyleInclude>
     <StyleInclude Source="../Controls/LabeledControl.axaml"></StyleInclude>
     <StyleInclude Source="../Controls/LinkControl.axaml"></StyleInclude>
     <StyleInclude Source="../Controls/ImageButton.axaml"></StyleInclude>
