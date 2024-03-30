@@ -13,7 +13,7 @@
                 <StackPanel Margin="{TemplateBinding Margin}">
                    
                     <Grid ColumnDefinitions="*,Auto">
-                        <controls:ExpanderControlToggle Grid.Column="0" IsContentVisible="{TemplateBinding IsContentVisible}" />
+                        <controls:ExpanderControlToggle Grid.Column="0" IsContentVisible="{TemplateBinding IsContentVisible}" Text="{TemplateBinding HeaderText}"/>
                     </Grid>
                     
                     <ContentPresenter Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" IsVisible="{TemplateBinding IsContentVisible}"></ContentPresenter>

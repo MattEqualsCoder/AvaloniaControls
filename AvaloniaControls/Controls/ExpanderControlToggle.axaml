@@ -11,7 +11,7 @@
         <StackPanel Orientation="Horizontal">
             <avalonia:MaterialIcon Kind="ChevronRightCircleOutline" IsVisible="{Binding !IsContentVisible }" Height="20" Width="20"/>
             <avalonia:MaterialIcon Kind="ChevronDownCircleOutline" IsVisible="{Binding IsContentVisible }" Height="20" Width="20"/>
-            <TextBlock FontSize="18" Margin="3 2 0 0">Test</TextBlock>
+            <TextBlock FontSize="18" Margin="3 2 0 0" Text="{Binding Text}"></TextBlock>
         </StackPanel>
     </Button>
 </UserControl>

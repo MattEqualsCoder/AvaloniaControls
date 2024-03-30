@@ -59,6 +59,11 @@
                                         </controls:FileControl>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="File Control WPF Filter">
+                                        <controls:FileControl OnUpdated="FileControl_OnOnUpdated" Filter="Text Files (*.txt, *.log)|*.txt;*.log|All files (*.*)|*.*" FilePath="{Binding TestPath}">
+                                        </controls:FileControl>
+                                    </controls:LabeledControl>
+                                    
                                     <controls:LabeledControl Text="Folder Control">
                                         <controls:FileControl OnUpdated="FileControl_OnOnUpdated" FileInputType="Folder" FilePath="{Binding FolderPath}">
                                         </controls:FileControl>

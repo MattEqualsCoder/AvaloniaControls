@@ -13,6 +13,15 @@ public partial class ExpanderControlToggle : UserControl
         DataContext = this;
     }
     
+    public static readonly StyledProperty<string> TextProperty = AvaloniaProperty.Register<CardControl, string>(
+        nameof(Text), defaultValue: "Expand");
+
+    public string Text
+    {
+        get => GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+    
     public static readonly StyledProperty<bool> IsContentVisibleProperty = AvaloniaProperty.Register<CardControl, bool>(
         nameof(IsContentVisible), defaultValue: true);
 

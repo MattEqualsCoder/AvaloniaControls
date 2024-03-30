@@ -174,18 +174,37 @@ public class CrossPlatformTools
         
         var toReturn = new List<FilePickerFileType>();
 
-        foreach (var filterPart in filter.Split(";"))
+        if (filter.Contains(':'))
         {
-            var filterParts = filterPart.Split(":");
-            if (filterParts.Length != 2)
+            foreach (var filterPart in filter.Split(";"))
             {
-                throw new InvalidOperationException($"{filter} has an invalid filter: {filterPart}");
-            }
+                var filterParts = filterPart.Split(":");
+                if (filterParts.Length != 2)
+                {
+                    throw new InvalidOperationException($"{filter} has an invalid filter: {filterPart}");
+                }
 
-            var patterns = filterParts[1].Split(",").Select(x => x.Trim()).ToArray();
-            
-            toReturn.Add(new FilePickerFileType(filterParts[0].Trim()) { Patterns = patterns });
+                var patterns = filterParts[1].Split(",").Select(x => x.Trim()).ToArray();
+                toReturn.Add(new FilePickerFileType(filterParts[0].Trim()) { Patterns = patterns });
+            }
         }
+        else
+        {
+            var parts = filter.Split('|');
+
+            if (parts.Length % 2 != 0)
+            {
+                throw new InvalidOperationException($"File filter {filter} is invalid");
+            }
+                
+            for (var i = 0; i < parts.Length; i += 2)
+            {
+                var description = parts[i].Trim();
+                var patterns = parts[i + 1].Split(";").Select(x => x.Trim()).ToList();
+                toReturn.Add(new FilePickerFileType(description) { Patterns = patterns });
+            }
+        }
+        
 
         return toReturn;
     }
