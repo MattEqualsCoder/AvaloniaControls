@@ -34,6 +34,12 @@ public abstract class RestorableWindow : ScalableWindow
         {
             return;
         }
+
+        var directoryInfo = new FileInfo(RestoreFilePath).Directory;
+        if (directoryInfo is { Exists: false })
+        {
+            Directory.CreateDirectory(directoryInfo.FullName);
+        }
         
         RestoreDetails = new WindowRestoreDetails()
         {
