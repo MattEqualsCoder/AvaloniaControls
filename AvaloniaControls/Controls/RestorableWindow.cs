@@ -10,6 +10,8 @@ namespace AvaloniaControls.Controls;
 
 public abstract class RestorableWindow : ScalableWindow
 {
+    private bool _hasClosed;
+    
     protected WindowRestoreDetails? RestoreDetails { get; set; }
     
     protected abstract string RestoreFilePath { get; }
@@ -30,7 +32,7 @@ public abstract class RestorableWindow : ScalableWindow
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(RestoreFilePath))
+        if (string.IsNullOrWhiteSpace(RestoreFilePath) || _hasClosed)
         {
             return;
         }
@@ -52,6 +54,7 @@ public abstract class RestorableWindow : ScalableWindow
 
         var contents = JsonSerializer.Serialize(RestoreDetails);
         File.WriteAllText(RestoreFilePath, contents);
+        _hasClosed = true;
     }
 
     private void Restore()
