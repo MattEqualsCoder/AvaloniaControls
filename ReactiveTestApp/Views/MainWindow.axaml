@@ -114,6 +114,16 @@
                                     </Grid>
                                     <TextBlock Text="{Binding MessageBoxResultDisplayText}"></TextBlock>
                                     
+                                    <TextBlock TextWrapping="Wrap">
+                                        Testing text wrapping Testing text wrapping Testing text wrapping Testing text
+                                        <InlineUIContainer>
+                                            <controls:LinkControl>
+                                                Testing text wrapping Testing text wrapping Testing 
+                                            </controls:LinkControl>
+                                        </InlineUIContainer>
+                                        Testing text wrapping Testing text wrapping Testing text wrapping Testing text wrapping  
+                                    </TextBlock>
+                                    
                                     <Separator Margin="0 10"></Separator>
                                     
                                     <StackPanel Orientation="Horizontal">
