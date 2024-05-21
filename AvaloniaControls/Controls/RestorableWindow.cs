@@ -16,7 +16,7 @@ public abstract class RestorableWindow : ScalableWindow
     
     protected abstract string RestoreFilePath { get; }
     protected abstract int DefaultWidth { get; }
-    protected abstract int DefualtHeight { get; }
+    protected abstract int DefaultHeight { get; }
 
     public RestorableWindow() : base()
     {
@@ -62,7 +62,7 @@ public abstract class RestorableWindow : ScalableWindow
         if (string.IsNullOrWhiteSpace(RestoreFilePath) || !File.Exists(RestoreFilePath))
         {
             Width = DefaultWidth;
-            Height = DefualtHeight;
+            Height = DefaultHeight;
             return;
         }
 
@@ -79,7 +79,7 @@ public abstract class RestorableWindow : ScalableWindow
         if (screen == null)
         {
             Width = DefaultWidth;
-            Height = DefualtHeight;
+            Height = DefaultHeight;
             return;
         }
         

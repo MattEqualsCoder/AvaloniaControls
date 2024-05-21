@@ -33,7 +33,7 @@ public partial class MainWindow : RestorableWindow
 
     protected override string RestoreFilePath => "test.json";
     protected override int DefaultWidth => 800;
-    protected override int DefualtHeight => 600;
+    protected override int DefaultHeight => 600;
 
     private void RangeBase_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
     {
