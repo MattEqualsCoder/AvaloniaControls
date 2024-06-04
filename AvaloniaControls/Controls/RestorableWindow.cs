@@ -67,8 +67,16 @@ public abstract class RestorableWindow : ScalableWindow
         }
 
         var contents = File.ReadAllText(RestoreFilePath);
-        RestoreDetails = JsonSerializer.Deserialize<WindowRestoreDetails>(contents);
 
+        try
+        {
+            RestoreDetails = JsonSerializer.Deserialize<WindowRestoreDetails>(contents);
+        }
+        catch (Exception)
+        {
+            return;
+        }
+        
         if (RestoreDetails == null)
         {
             return;
