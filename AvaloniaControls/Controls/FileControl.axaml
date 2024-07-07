@@ -10,8 +10,8 @@
     <Grid ColumnDefinitions="*,Auto,Auto">
         <TextBox Grid.Column="0" 
                  Text="{Binding ElementName=MyFileControl, Path=FilePath}"
-                 IsReadOnly="True" 
                  IsEnabled="True"
+                 TextChanging="TextBox_OnTextChanging"
                  IsVisible="{Binding ElementName=MyFileControl, Path=ShowTextBox}" 
                  Watermark="{Binding ElementName=MyFileControl, Path=Watermark}"
         />

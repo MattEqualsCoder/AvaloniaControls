@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -168,25 +167,34 @@ public partial class FileControl : UserControl
             return;
         }
 
-        var path = file.Path.LocalPath;
-        var attr = File.GetAttributes(path);
-        bool isDirectory = (attr & FileAttributes.Directory) == FileAttributes.Directory;
+        ValidateAndSetPath(file.Path.LocalPath);
+    }
+
+    private bool ValidateAndSetPath(string path)
+    {
+        if (!File.Exists(path) && !Directory.Exists(path))
+        {
+            return false;
+        }
         
-        if (FileInputType == FileInputControlType.OpenFile && !isDirectory && VerifyFileMeetsFilter(path))
+        var attr = File.GetAttributes(path);
+        var isDirectory = (attr & FileAttributes.Directory) == FileAttributes.Directory;
+
+        var isValid = FileInputType switch
+        {
+            FileInputControlType.OpenFile when !isDirectory && VerifyFileMeetsFilter(path) => true,
+            FileInputControlType.SaveFile when !isDirectory && VerifyFileMeetsFilter(path) => true,
+            FileInputControlType.Folder when isDirectory => true,
+            _ => false
+        };
+
+        if (isValid)
         {
             FilePath = path;
-            OnUpdated?.Invoke(this, new FileControlUpdatedEventArgs(FilePath!));    
+            OnUpdated?.Invoke(this, new FileControlUpdatedEventArgs(path));
         }
-        else if (FileInputType == FileInputControlType.SaveFile && !isDirectory && VerifyFileMeetsFilter(path))
-        {
-            FilePath = path;
-            OnUpdated?.Invoke(this, new FileControlUpdatedEventArgs(FilePath!));    
-        }
-        else if (FileInputType == FileInputControlType.Folder && isDirectory)
-        {
-            FilePath = path;
-            OnUpdated?.Invoke(this, new FileControlUpdatedEventArgs(FilePath!)); 
-        }
+
+        return isValid;
     }
 
     private async void BrowseButton_OnClick(object? sender, RoutedEventArgs e)
@@ -266,17 +274,36 @@ public partial class FileControl : UserControl
         {
             return true;
         }
+
+        if (Filter.Contains(':'))
+        {
+            try
+            {
+                var regexParts = Filter.Split(";").Select(x => x.Split(":")[1].Replace(".", "\\.").Replace("*", ".*")).SelectMany(x => x.Split(",")).Select(x => x.Trim());
+                var regex = $"({string.Join("|", regexParts)})";
+                return Regex.IsMatch(file, regex);
+            }
+            catch
+            {
+                // Just ignore it
+            }
+        }
+        else
+        {
+            try
+            {
+                var regexParts = Filter.Split("|").Select(x => x.Split("(").Last().Replace(")", "").Replace(".", "\\.").Replace("*", ".*")).SelectMany(x => x.Split(",")).Select(x => x.Trim());
+                var regex = $"({string.Join("|", regexParts)})";
+                return Regex.IsMatch(file, regex);
+            }
+            catch
+            {
+                // Just ignore it
+            }
+        }
+        var separator = Filter.Contains(':') ? "," : ";";
         
-        try
-        {
-            var regexParts = Filter.Split(";").Select(x => x.Split(":")[1].Replace(".", "\\.").Replace("*", ".*"));
-            var regex = $"({string.Join("|", regexParts)})";
-            return Regex.IsMatch(file, regex);
-        }
-        catch
-        {
-            // Just ignore it
-        }
+        
 
         return false;
     }
@@ -324,5 +351,20 @@ public partial class FileControl : UserControl
 
         return result?.PressedAcceptButton == true;
 
+    }
+
+    private void TextBox_OnTextChanging(object? sender, TextChangingEventArgs e)
+    {
+        if (sender is not TextBox textBox || textBox.Text == FilePath) return;
+        if (string.IsNullOrEmpty(textBox.Text))
+        {
+            FilePath = "";
+            return;
+        }
+
+        if (!ValidateAndSetPath(textBox.Text))
+        {
+            textBox.Text = FilePath;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using AvaloniaControls.ControlServices;
 using AvaloniaControls.Services;
@@ -14,5 +15,15 @@ public static class ControlExtensions
     public static object? GetControlService(this Control control)
     {
         return IControlServiceFactory.GetControlService(control);
+    }
+
+    public static Task<string?> GetClipboardAsync(this Control control)
+    {
+        return TopLevel.GetTopLevel(control)?.Clipboard?.GetTextAsync() ?? Task.FromResult<string?>(null);
+    }
+    
+    public static Task SetClipboardAsync(this Control control, string? text)
+    {
+        return TopLevel.GetTopLevel(control)?.Clipboard?.SetTextAsync(text) ?? Task.CompletedTask;
     }
 }
