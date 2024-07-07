@@ -56,7 +56,7 @@ sealed class Program
         
         try
         {
-            BuildAvaloniaApp()
+           BuildAvaloniaApp()
                 .StartWithClassicDesktopLifetime(args);
         }
         catch (Exception e)

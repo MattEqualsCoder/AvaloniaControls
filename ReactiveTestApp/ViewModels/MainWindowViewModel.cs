@@ -27,6 +27,10 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public TestEnums TestEnum { get; set; }
 
     [Reactive] public TestEnums TestEnum2 { get; set; } = TestEnums.ValueThree;
+    
+    [Reactive] public int TimeInSeconds { get; set; }
+    
+    [Reactive] public int ValueNoScroll { get; set; }
 
     [Reactive]
     [ReactiveLinkedProperties(nameof(MessageBoxResultDisplayText))]

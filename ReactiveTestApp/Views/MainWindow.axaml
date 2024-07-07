@@ -105,6 +105,14 @@
                                         </controls:EnumComboBox>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="Numeric Up Down (Time)">
+                                        <controls:NumericUpDownTime Value="{Binding TimeInSeconds}"></controls:NumericUpDownTime>
+                                    </controls:LabeledControl>
+                                    
+                                    <controls:LabeledControl Text="Numeric Up Down (No Mouse Scroll)">
+                                        <controls:NumericUpDownNoScroll Value="{Binding ValueNoScroll}"></controls:NumericUpDownNoScroll>
+                                    </controls:LabeledControl>
+                                    
                                     <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
                                         <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                                         
