@@ -113,6 +113,23 @@
                                         <controls:NumericUpDownNoScroll Value="{Binding ValueNoScroll}"></controls:NumericUpDownNoScroll>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="Combo Box and Search Control">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>Display: </TextBlock>
+                                                <TextBlock Text="{Binding SelectedDisplay}"></TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>Value: </TextBlock>
+                                                <TextBlock Text="{Binding SelectedValue}"></TextBlock>
+                                            </StackPanel>
+                                            <controls:ComboBoxAndSearchControl Items="{Binding SearchItems}" DisplayValue="{Binding SelectedDisplay, Mode=TwoWay}" Value="{Binding SelectedValue, Mode=TwoWay}"></controls:ComboBoxAndSearchControl>
+                                            <ComboBox ItemsSource="{Binding SearchItemsText}" SelectedValue="{Binding SelectedDisplay}"></ComboBox>
+                                            <controls:NumericUpDownNoScroll Value="{Binding SelectedValue}" Minimum="1" Maximum="4"></controls:NumericUpDownNoScroll>
+                                            
+                                        </StackPanel>
+                                    </controls:LabeledControl>
+                                    
                                     <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
                                         <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                                         

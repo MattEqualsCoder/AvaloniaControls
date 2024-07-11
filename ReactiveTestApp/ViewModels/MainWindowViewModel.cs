@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using AvaloniaControls.Controls;
 using AvaloniaControls.Models;
 using ReactiveUI.Fody.Helpers;
@@ -31,6 +33,21 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public int TimeInSeconds { get; set; }
     
     [Reactive] public int ValueNoScroll { get; set; }
+
+    [Reactive]
+    public List<ComboBoxAndSearchItem> SearchItems { get; set; } =
+    [
+        new ComboBoxAndSearchItem(1, "Item 1", "Item 1 Description"),
+        new ComboBoxAndSearchItem(2, "Option 2", "Option 2 Description"),
+        new ComboBoxAndSearchItem(3, "Option 3", "Option 3 Description"),
+        new ComboBoxAndSearchItem(4)
+    ];
+
+    [Reactive] public List<string> SearchItemsText { get; set; } = [];
+
+    [Reactive] public string SelectedDisplay { get; set; } = "";
+
+    [Reactive] public int SelectedValue { get; set; } = 2;
 
     [Reactive]
     [ReactiveLinkedProperties(nameof(MessageBoxResultDisplayText))]

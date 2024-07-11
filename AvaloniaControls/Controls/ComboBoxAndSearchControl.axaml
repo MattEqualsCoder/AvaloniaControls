@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:controls="clr-namespace:AvaloniaControls.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="30"
+             x:Class="AvaloniaControls.Controls.ComboBoxAndSearchControl"
+             Loaded="Control_OnLoaded"
+             x:DataType="controls:ComboBoxAndSearchControl">
+    <Grid ColumnDefinitions="* Auto Auto">
+        
+        <ComboBox Grid.Column="0"
+                  Name="ComboBox"
+                  SelectionChanged="ComboBox_OnSelectionChanged"
+        />
+        
+        <AutoCompleteBox Grid.Column="0" 
+                         Name="AutoCompleteBox" 
+                         IsVisible="false" 
+                         FilterMode="Contains"
+                         Populated="AutoCompleteBox_OnPopulated"
+                         TextChanged="AutoCompleteBox_OnTextChanged"
+                         LostFocus="AutoCompleteBox_OnLostFocus"
+                         KeyDown="AutoCompleteBox_OnKeyDown"
+        ></AutoCompleteBox>
+        
+        <Button Grid.Column="1" Name="SearchButton" Click="SearchButton_OnClick" Margin="3 0 0 0" >
+            <avalonia:MaterialIcon Kind="Search" Height="18" Width="18" Name="SearchIcon"></avalonia:MaterialIcon>
+        </Button>
+        
+        <avalonia:MaterialIcon 
+            Grid.Column="2"
+            x:Name="DescriptionIcon"
+            Kind="Information"
+            Margin="3 -5 0 0"
+            Width="16" Height="16"
+            IsVisible="False"
+        ></avalonia:MaterialIcon>
+    </Grid>
+</UserControl>

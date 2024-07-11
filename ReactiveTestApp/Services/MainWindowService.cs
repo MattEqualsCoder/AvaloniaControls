@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using AutoMapper;
 using AvaloniaControls.ControlServices;
@@ -14,6 +15,7 @@ public class MainWindowService(ILogger<MainWindowService> logger, IMapper mapper
 
     public MainWindowViewModel InitializeModel()
     {
+        Model.SearchItemsText = Model.SearchItems.Select(x => x.Display).ToList();
         return Model;
     }
 
