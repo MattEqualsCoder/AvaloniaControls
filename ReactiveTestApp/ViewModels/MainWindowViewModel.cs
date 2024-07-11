@@ -53,6 +53,16 @@ public class MainWindowViewModel : ViewModelBase
     [ReactiveLinkedProperties(nameof(MessageBoxResultDisplayText))]
     public string? MessageBoxResult { get; set; }
 
+    public List<string> LinkedEventDropdown => ["Option 1", "Option 2", "Option 3"];
+
+    [Reactive]
+    [ReactiveLinkedEvent(nameof(OnLinkedEventSelection))]
+    public string LinkedEventSelection { get; set; } = "";
+
+#pragma warning disable CS0067 // Mark members as static
+    public event EventHandler? OnLinkedEventSelection; 
+#pragma warning restore CS0067 // Mark members as static
+
     public string MessageBoxResultDisplayText => $"Message Box Result: {MessageBoxResult ?? "N/A"}";
     
     public Func<string, string>? UpdateEnumDescription => s => s + " Updated";

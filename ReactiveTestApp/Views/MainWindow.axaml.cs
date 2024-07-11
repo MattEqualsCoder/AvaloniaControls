@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
@@ -28,7 +26,12 @@ public partial class MainWindow : RestorableWindow
         }
 
         _service = this.GetControlService<MainWindowService>();
-        DataContext = _service?.InitializeModel();
+        DataContext = _model = _service?.InitializeModel() ?? _model;
+        
+        _model.OnLinkedEventSelection += async (sender, args) =>
+        {
+            await MessageWindow.ShowMessageDialog($"You selected {_model.LinkedEventSelection}", "Linked Event Result");
+        };
     }
 
     protected override string RestoreFilePath => "test.json";
@@ -94,6 +97,7 @@ public partial class MainWindow : RestorableWindow
         var messageWindow = new MessageWindow(new MessageWindowRequest()
         {
             Buttons = MessageWindowButtons.OK,
+            Icon = MessageWindowIcon.Question,
             Message = "Hello there! You can check the box, click on the link, or type in the text box.",
             Title = "Basic Message Window",
             CheckBoxText = "Select this to do something!",

@@ -63,6 +63,121 @@ public partial class MessageWindow : ScalableWindow
         return base.ShowDialog(window);
     }
 
+    public static Task ShowInfoDialog(string message, string? title = null, Window? parentWindow = null)
+    {
+        parentWindow ??= GlobalParentWindow;
+        title ??= parentWindow?.Title ?? "Info";
+        
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Title = title,
+            Message = message,
+            Icon = MessageWindowIcon.Info,
+            Buttons = MessageWindowButtons.OK
+        });
+        
+        if (parentWindow != null)
+        {
+            return window.ShowDialog(parentWindow);
+        }
+        else
+        {
+            window.ShowDialog();
+            return Task.CompletedTask;
+        } 
+    }
+    
+    public static Task ShowErrorDialog(string message, string? title = null, Window? parentWindow = null)
+    {
+        parentWindow ??= GlobalParentWindow;
+        title ??= parentWindow?.Title ?? "Error";
+        
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Title = title,
+            Message = message,
+            Icon = MessageWindowIcon.Error,
+            Buttons = MessageWindowButtons.OK
+        });
+        
+        if (parentWindow != null)
+        {
+            return window.ShowDialog(parentWindow);
+        }
+        else
+        {
+            window.ShowDialog();
+            return Task.CompletedTask;
+        } 
+    }
+    
+    public static async Task<bool> ShowYesNoDialog(string message, string? title = null, Window? parentWindow = null)
+    {
+        parentWindow ??= GlobalParentWindow;
+        title ??= parentWindow?.Title ?? "Question";
+        
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Title = title,
+            Message = message,
+            Icon = MessageWindowIcon.Question,
+            Buttons = MessageWindowButtons.YesNo
+        });
+        
+        if (parentWindow != null)
+        {
+            await window.ShowDialog(parentWindow);
+        }
+        else
+        {
+            window.ShowDialog();
+        } 
+        
+        return window.DialogResult?.PressedAcceptButton == true;
+    }
+    
+    public static Task ShowMessageDialog(string message, string? title = null, Window? parentWindow = null)
+    {
+        parentWindow ??= GlobalParentWindow;
+        title ??= parentWindow?.Title ?? "Message";
+        
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Title = title,
+            Message = message,
+            Icon = MessageWindowIcon.None,
+            Buttons = MessageWindowButtons.OK
+        });
+        
+        if (parentWindow != null)
+        {
+            return window.ShowDialog(parentWindow);
+        }
+        else
+        {
+            window.ShowDialog();
+            return Task.CompletedTask;
+        } 
+    }
+    
+    public static async Task<MessageWindowResult?> ShowMessageDialog(MessageWindowRequest request, Window? parentWindow = null)
+    {
+        parentWindow ??= GlobalParentWindow;
+        
+        var window = new MessageWindow(request);
+        
+        if (parentWindow != null)
+        {
+            await window.ShowDialog(parentWindow);
+        }
+        else
+        {
+            window.ShowDialog();
+        }
+
+        return window.DialogResult;
+    }
+
     private void Button1_OnClick(object? sender, RoutedEventArgs e)
     {
         DialogResult = new MessageWindowResult()

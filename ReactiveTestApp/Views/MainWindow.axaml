@@ -130,6 +130,10 @@
                                         </StackPanel>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="Reactive Linked Event">
+                                        <ComboBox ItemsSource="{Binding LinkedEventDropdown}" SelectedValue="{Binding LinkedEventSelection}"></ComboBox>
+                                    </controls:LabeledControl>
+                                    
                                     <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
                                         <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                                         
