@@ -23,6 +23,7 @@
                          TextChanged="AutoCompleteBox_OnTextChanged"
                          LostFocus="AutoCompleteBox_OnLostFocus"
                          KeyDown="AutoCompleteBox_OnKeyDown"
+                         SelectionChanged="AutoCompleteBox_OnSelectionChanged"
         ></AutoCompleteBox>
         
         <Button Grid.Column="1" Name="SearchButton" Click="SearchButton_OnClick" Margin="3 0 0 0" >

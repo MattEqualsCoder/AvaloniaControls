@@ -19,6 +19,7 @@ public partial class ComboBoxAndSearchControl : UserControl
     private List<string>? _prevSearchResults;
     private bool _enableSearch;
     private bool _canEnable = true;
+    private string? _autoCompleteSelectedItem;
     
     public ComboBoxAndSearchControl()
     {
@@ -191,8 +192,6 @@ public partial class ComboBoxAndSearchControl : UserControl
         var selectedItem = Items.FirstOrDefault(x => x.Value?.ToString() == Value?.ToString()) ?? Items.First();
         OnValueChanged(selectedItem);
         comboBox.SelectedValue = selectedItem.Display;
-
-        // this.Find<ComboBox>(nameof(ComboBox))!.SelectedIndex = items.IndexOf(selectedItem.Display);
     }
 
     private void AutoCompleteBox_OnLostFocus(object? sender, RoutedEventArgs e)
@@ -215,11 +214,20 @@ public partial class ComboBoxAndSearchControl : UserControl
     private void ElementOnKeyDown(object? sender, KeyEventArgs e)
     {
         if (e.Key is not (Key.Enter or Key.Return or Key.Tab)) return;
-        if (_prevSearchResults?.Count > 1)
+        if (_autoCompleteSelectedItem != null)
+        {
+            Search(_autoCompleteSelectedItem);
+        }
+        else if (sender is TextBox textBox && !string.IsNullOrEmpty(textBox.Text) && _prevSearchResults?.Count > 1 && _prevSearchResults.First().Contains(textBox.Text, StringComparison.OrdinalIgnoreCase))
         {
             Search(_prevSearchResults.First());
         }
         SetEnableSearch(false);
         this.Find<ComboBox>(nameof(ComboBox))!.Focus();
+    }
+
+    private void AutoCompleteBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        _autoCompleteSelectedItem = e.AddedItems.Cast<string>().FirstOrDefault();
     }
 }
