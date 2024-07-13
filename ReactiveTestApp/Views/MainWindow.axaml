@@ -105,6 +105,25 @@
                                         </controls:EnumComboBox>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="Bool ComboBox">
+                                        <StackPanel Orientation="Vertical">
+                                            <controls:BoolComboBox 
+                                                AllowNulls="True"
+                                                Value="{Binding NullableBoolComboBoxValue, Mode=TwoWay}" 
+                                            />
+                                            <TextBlock Text="{Binding NullableBoolComboBoxValueText}"></TextBlock>
+                                            
+                                            <controls:BoolComboBox
+                                                AllowNulls="False"
+                                                Value="{Binding BoolComboBoxValue, Mode=TwoWay}"
+                                                TrueDisplayText="Agree"
+                                                FalseDisplayText="Disagree"
+                                            />
+                                            <TextBlock Text="{Binding BoolComboBoxValueText}"></TextBlock>
+                                        </StackPanel>
+                                        
+                                    </controls:LabeledControl>
+                                    
                                     <controls:LabeledControl Text="Numeric Up Down (Time)">
                                         <controls:NumericUpDownTime Value="{Binding TimeInSeconds}"></controls:NumericUpDownTime>
                                     </controls:LabeledControl>

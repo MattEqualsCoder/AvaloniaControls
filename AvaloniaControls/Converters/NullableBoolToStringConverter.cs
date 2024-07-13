@@ -20,21 +20,18 @@ public sealed class NullableBoolToStringConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        switch ((string?)value)
+        return (string?)value switch
         {
-            case Yes:
-                return true;
-            case No:
-                return false;
-            default:
-                return null;
-        }
+            Yes => true,
+            No => false,
+            _ => null
+        };
     }
     
-    public static readonly string[] ItemsSource = new[]
-    {
+    public static readonly string[] ItemsSource =
+    [
         Unspecified,
         Yes,
         No
-    };
+    ];
 }

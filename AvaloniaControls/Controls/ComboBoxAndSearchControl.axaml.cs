@@ -171,6 +171,11 @@ public partial class ComboBoxAndSearchControl : UserControl
 
     private void Control_OnLoaded(object? sender, RoutedEventArgs e)
     {
+        if (Items.Count == 0)
+        {
+            return;
+        }
+        
         var items = Items.Select(x => x.Display).ToList();
         var comboBox = this.Find<ComboBox>(nameof(ComboBox))!;
         var autoComplete = this.Find<AutoCompleteBox>(nameof(AutoCompleteBox))!;

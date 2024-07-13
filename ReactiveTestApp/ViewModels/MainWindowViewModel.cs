@@ -29,6 +29,15 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public TestEnums TestEnum { get; set; }
 
     [Reactive] public TestEnums TestEnum2 { get; set; } = TestEnums.ValueThree;
+
+    [Reactive, ReactiveLinkedProperties(nameof(NullableBoolComboBoxValueText))] public bool? NullableBoolComboBoxValue { get; set; } = true;
+
+    public string NullableBoolComboBoxValueText => NullableBoolComboBoxValue == null
+        ? "null"
+        : NullableBoolComboBoxValue.ToString() ?? "Unknown";
+    
+    [Reactive, ReactiveLinkedProperties(nameof(BoolComboBoxValueText))] public bool BoolComboBoxValue { get; set; }
+    public string BoolComboBoxValueText => BoolComboBoxValue.ToString() ?? "Unknown";
     
     [Reactive] public int TimeInSeconds { get; set; }
     

@@ -14,20 +14,18 @@ public sealed class BoolToStringConverter : IValueConverter
         return (bool?)value == true ? Yes : No;
     }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        switch ((string?)value)
+        return (string?)value switch
         {
-            case Yes:
-                return true;
-            default:
-                return false;
-        }
+            Yes => true,
+            _ => false
+        };
     }
     
-    public static readonly string[] ItemsSource = new[]
-    {
+    public static readonly string[] ItemsSource =
+    [
         Yes,
         No
-    };
+    ];
 }

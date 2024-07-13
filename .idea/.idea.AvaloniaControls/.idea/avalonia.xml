@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="AvaloniaControls/App.axaml" value="AvaloniaControls/AvaloniaControls.csproj" />
+        <entry key="AvaloniaControls/Controls/BoolComboBox.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/CardControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/CardControlToggle.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/ComboBoxAndSearchControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
