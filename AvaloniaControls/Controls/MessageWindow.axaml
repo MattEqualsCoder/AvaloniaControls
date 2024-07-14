@@ -29,7 +29,7 @@
                 <avalonia:MaterialIcon Kind="{Binding MaterialIconKind}" Height="50" Width="50" />    
             </Border>
             
-            <StackPanel Orientation="Vertical" Margin="10" >
+            <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Center">
                 <TextBlock VerticalAlignment="Center" 
                            TextWrapping="Wrap" 
                            Text="{Binding Message}" />

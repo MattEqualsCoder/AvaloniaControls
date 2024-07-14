@@ -62,8 +62,9 @@ public partial class MainWindow : RestorableWindow
         var messageWindow = new MessageWindow(new MessageWindowRequest()
         {
             Buttons = MessageWindowButtons.YesNo,
-            Message = "Hello there! You can click Yes to accept or No to decline.",
-            Title = "Basic Message Window"
+            Message = "Hello! Click Yes to accept or No to decline.",
+            Title = "Basic Message Window",
+            Icon = MessageWindowIcon.Info
         });
         messageWindow.ShowDialog(control);
         messageWindow.Closed += (o, args) =>
