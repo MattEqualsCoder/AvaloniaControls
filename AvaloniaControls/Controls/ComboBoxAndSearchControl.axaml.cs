@@ -46,6 +46,38 @@ public partial class ComboBoxAndSearchControl : UserControl
             this.FindControl<ComboBox>(nameof(ComboBox))!.SelectedValue = item.Display;
             DisplayValue = item.Display;
         });
+
+        ItemsProperty.Changed.Subscribe(x =>
+        {
+            var newItems = x.NewValue.Value;
+
+            if (newItems.Count == 0)
+            {
+                return;
+            }
+                
+            var items = newItems.Select(c => c.Display).ToList();
+            var comboBox = this.Find<ComboBox>(nameof(ComboBox))!;
+            var autoComplete = this.Find<AutoCompleteBox>(nameof(AutoCompleteBox))!;
+            comboBox.ItemsSource = items;
+            autoComplete.ItemsSource = items;
+
+            if (!string.IsNullOrEmpty(DisplayValue))
+            {
+                var item = newItems.FirstOrDefault(c => c.Display == DisplayValue);
+
+                if (item != null)
+                {
+                    OnValueChanged(item);
+                    comboBox.SelectedValue = item.Display;
+                    return;
+                }
+            }
+
+            var selectedItem = newItems.FirstOrDefault(c => c.Value?.ToString() == Value?.ToString()) ?? Items.First();
+            OnValueChanged(selectedItem);
+            comboBox.SelectedValue = selectedItem.Display;
+        });
     }
     
     public static readonly StyledProperty<List<ComboBoxAndSearchItem>> ItemsProperty = AvaloniaProperty.Register<ComboBoxAndSearchControl, List<ComboBoxAndSearchItem>>(
@@ -167,36 +199,6 @@ public partial class ComboBoxAndSearchControl : UserControl
         {
             OnValueChanged(selectedItem);   
         }
-    }
-
-    private void Control_OnLoaded(object? sender, RoutedEventArgs e)
-    {
-        if (Items.Count == 0)
-        {
-            return;
-        }
-        
-        var items = Items.Select(x => x.Display).ToList();
-        var comboBox = this.Find<ComboBox>(nameof(ComboBox))!;
-        var autoComplete = this.Find<AutoCompleteBox>(nameof(AutoCompleteBox))!;
-        comboBox.ItemsSource = items;
-        autoComplete.ItemsSource = items;
-
-        if (!string.IsNullOrEmpty(DisplayValue))
-        {
-            var item = Items.FirstOrDefault(x => x.Display == DisplayValue);
-
-            if (item != null)
-            {
-                OnValueChanged(item);
-                comboBox.SelectedValue = item.Display;
-                return;
-            }
-        }
-
-        var selectedItem = Items.FirstOrDefault(x => x.Value?.ToString() == Value?.ToString()) ?? Items.First();
-        OnValueChanged(selectedItem);
-        comboBox.SelectedValue = selectedItem.Display;
     }
 
     private void AutoCompleteBox_OnLostFocus(object? sender, RoutedEventArgs e)

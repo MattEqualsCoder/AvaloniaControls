@@ -6,7 +6,6 @@
              xmlns:controls="clr-namespace:AvaloniaControls.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="30"
              x:Class="AvaloniaControls.Controls.ComboBoxAndSearchControl"
-             Loaded="Control_OnLoaded"
              x:DataType="controls:ComboBoxAndSearchControl">
     <Grid ColumnDefinitions="* Auto Auto">
         
