@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:controls="clr-namespace:AvaloniaControls.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="100"
-             x:Class="AvaloniaControls.Controls.ExpanderControlToggle"
-             x:DataType="controls:ExpanderControlToggle">
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="controls:CardControlExpanderControl"
+             x:Class="AvaloniaControls.Controls.CardControlExpanderControl">
     <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Cursor="Hand" HorizontalContentAlignment="Left" Click="Button_OnClick">
         <StackPanel Orientation="Horizontal">
-            <avalonia:MaterialIcon Kind="ChevronRightCircleOutline" IsVisible="{Binding !IsContentVisible }" Height="20" Width="20"/>
-            <avalonia:MaterialIcon Kind="ChevronDownCircleOutline" IsVisible="{Binding IsContentVisible }" Height="20" Width="20"/>
-            <TextBlock FontSize="18" Margin="3 2 0 0" Text="{Binding Text}"></TextBlock>
+            <avalonia:MaterialIcon Kind="ChevronRight" IsVisible="{Binding !IsContentVisible }" Height="20" Width="20"/>
+            <avalonia:MaterialIcon Kind="ChevronDown" IsVisible="{Binding IsContentVisible }" Height="20" Width="20"/>
+            <TextBlock FontSize="12" Margin="3 2 0 0" Text="{Binding Text}"></TextBlock>
         </StackPanel>
     </Button>
 </UserControl>

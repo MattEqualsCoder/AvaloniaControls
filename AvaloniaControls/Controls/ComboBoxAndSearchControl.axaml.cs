@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
@@ -99,7 +100,7 @@ public partial class ComboBoxAndSearchControl : UserControl
     }
     
     public static readonly StyledProperty<object?> ValueProperty = AvaloniaProperty.Register<ComboBoxAndSearchControl, object?>(
-        nameof(Value));
+        nameof(Value), defaultBindingMode: BindingMode.TwoWay);
 
     public object? Value
     {

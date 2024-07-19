@@ -281,7 +281,7 @@ public partial class FileControl : UserControl
             {
                 var regexParts = Filter.Split(";").Select(x => x.Split(":")[1].Replace(".", "\\.").Replace("*", ".*")).SelectMany(x => x.Split(",")).Select(x => x.Trim());
                 var regex = $"({string.Join("|", regexParts)})";
-                return Regex.IsMatch(file, regex);
+                return Regex.IsMatch(file, regex, OperatingSystem.IsWindows() ? RegexOptions.None : RegexOptions.IgnoreCase);
             }
             catch
             {
@@ -294,7 +294,7 @@ public partial class FileControl : UserControl
             {
                 var regexParts = Filter.Split("|").Select(x => x.Split("(").Last().Replace(")", "").Replace(".", "\\.").Replace("*", ".*")).SelectMany(x => x.Split(",")).Select(x => x.Trim());
                 var regex = $"({string.Join("|", regexParts)})";
-                return Regex.IsMatch(file, regex);
+                return Regex.IsMatch(file, regex, OperatingSystem.IsWindows() ? RegexOptions.None : RegexOptions.IgnoreCase);
             }
             catch
             {
@@ -356,13 +356,13 @@ public partial class FileControl : UserControl
     private void TextBox_OnTextChanging(object? sender, TextChangingEventArgs e)
     {
         if (sender is not TextBox textBox || textBox.Text == FilePath) return;
-        if (string.IsNullOrEmpty(textBox.Text))
+        if (string.IsNullOrEmpty(textBox.Text) && ShowClearButton)
         {
             FilePath = "";
             return;
         }
 
-        if (!ValidateAndSetPath(textBox.Text))
+        if (!ValidateAndSetPath(textBox.Text ?? ""))
         {
             textBox.Text = FilePath;
         }

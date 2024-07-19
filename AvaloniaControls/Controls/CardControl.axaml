@@ -1,6 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:AvaloniaControls.Controls">
+        xmlns:controls="clr-namespace:AvaloniaControls.Controls"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
     <Design.PreviewWith>
         <controls:CardControl />
     </Design.PreviewWith>
@@ -25,14 +26,16 @@
                             >
                                 <Grid ColumnDefinitions="*,Auto">
                                     
-                                    <Label Grid.Column="0" Content="{TemplateBinding HeaderText}" Padding="5" VerticalAlignment="Center"></Label>
+                                    <controls:CardControlExpanderControl Grid.Column="0" Text="{TemplateBinding HeaderText}" IsVisible="{TemplateBinding CanCollapse}"></controls:CardControlExpanderControl>
+                                    
+                                    <Label Grid.Column="0" Content="{TemplateBinding HeaderText}" Padding="5" VerticalAlignment="Center" IsVisible="{TemplateBinding CanNotCollapse}"></Label>
                                     
                                     <ContentPresenter Grid.Column="1" Content="{TemplateBinding HeaderButtons}" IsVisible="{TemplateBinding DisplayHeaderButtons}"></ContentPresenter>
                                 </Grid>
                                 
                             </Border>
                             
-                            <Border Background="{DynamicResource CardBackgroundColor}">
+                            <Border Background="{DynamicResource CardBackgroundColor}" IsVisible="{TemplateBinding IsContentVisible}">
                                 <ContentPresenter Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}"></ContentPresenter>
                             </Border>
                     

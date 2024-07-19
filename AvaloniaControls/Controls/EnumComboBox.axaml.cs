@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using AvaloniaControls.Models;
@@ -20,6 +21,11 @@ public partial class EnumComboBox : UserControl
     {
         InitializeComponent();
         _mainComboBox = this.Find<ComboBox>(nameof(MainComboBox))!;
+        
+        ValueProperty.Changed.Subscribe(x =>
+        {
+            UpdateSelectedValue();
+        });
     }
 
     public event EnumValueChangedEventHandler? ValueChanged;
@@ -43,7 +49,7 @@ public partial class EnumComboBox : UserControl
     }
     
     public static readonly StyledProperty<object?> ValueProperty = AvaloniaProperty.Register<EnumComboBox, object?>(
-        nameof(Value));
+        nameof(Value), defaultBindingMode: BindingMode.TwoWay);
 
     public object? Value
     {
@@ -115,17 +121,21 @@ public partial class EnumComboBox : UserControl
         }
 
         _mainComboBox.ItemsSource = _names;
+        UpdateSelectedValue();
+    }
 
+    private void UpdateSelectedValue()
+    {
         if (Value != null && _valueDescriptions.TryGetValue(Value, out var value))
         {
             _mainComboBox.SelectedValue = value;    
         }
-        else
+        else if(_names.Count > 0)
         {
             _mainComboBox.SelectedValue = _names.First();
         }
     }
-
+    
     private void Control_OnLoaded(object? sender, RoutedEventArgs e)
     {
         PopulateValues(EnumType);

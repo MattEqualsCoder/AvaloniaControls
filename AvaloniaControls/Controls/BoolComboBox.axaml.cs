@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Interactivity;
 using DynamicData;
+using System;
 
 namespace AvaloniaControls.Controls;
 
@@ -15,10 +17,15 @@ public partial class BoolComboBox : UserControl
     public BoolComboBox()
     {
         InitializeComponent();
+
+        ValueProperty.Changed.Subscribe(x =>
+        {
+            UpdateComboBox();
+        });
     }
     
     public static readonly StyledProperty<object?> ValueProperty = AvaloniaProperty.Register<EnumComboBox, object?>(
-        nameof(Value));
+        nameof(Value), defaultBindingMode: BindingMode.TwoWay);
 
     public object? Value
     {
@@ -64,11 +71,17 @@ public partial class BoolComboBox : UserControl
     
     private void MainComboBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (e.AddedItems.Count == 0) return;
         var selectedText = e.AddedItems[0] as string ?? "";
         Value = AllowNulls ? NullValues[_options.IndexOf(selectedText)] : NonNullValues[_options.IndexOf(selectedText)];
     }
 
     private void MainComboBox_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        UpdateComboBox();
+    }
+
+    private void UpdateComboBox()
     {
         string value;
         
