@@ -362,9 +362,19 @@ public partial class FileControl : UserControl
             return;
         }
 
-        if (!ValidateAndSetPath(textBox.Text ?? ""))
+        var text = textBox.Text ?? "";
+        if (text.StartsWith('"') && text.EndsWith('"'))
+        {
+            text = text.Substring(1, text.Length - 2);
+        }
+
+        if (!ValidateAndSetPath(text))
         {
             textBox.Text = FilePath;
+        }
+        else if (textBox.Text != text)
+        {
+            textBox.Text = text;
         }
     }
 }
