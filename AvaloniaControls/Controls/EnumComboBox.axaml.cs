@@ -24,6 +24,7 @@ public partial class EnumComboBox : UserControl
         
         ValueProperty.Changed.Subscribe(x =>
         {
+            if (x.Sender != this) return;
             UpdateSelectedValue();
         });
     }

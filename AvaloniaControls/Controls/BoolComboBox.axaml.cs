@@ -20,6 +20,7 @@ public partial class BoolComboBox : UserControl
 
         ValueProperty.Changed.Subscribe(x =>
         {
+            if (x.Sender != this) return;
             UpdateComboBox();
         });
     }
