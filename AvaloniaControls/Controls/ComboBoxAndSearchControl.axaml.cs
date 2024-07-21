@@ -28,6 +28,7 @@ public partial class ComboBoxAndSearchControl : UserControl
 
         DisplayValueProperty.Changed.Subscribe(x =>
         {
+            if (x.Sender != this) return;
             var item = Items.FirstOrDefault(i => i.Display == x.NewValue.Value);
             if (item == null)
             {
@@ -39,6 +40,7 @@ public partial class ComboBoxAndSearchControl : UserControl
         
         ValueProperty.Changed.Subscribe(x =>
         {
+            if (x.Sender != this) return;
             var item = Items.FirstOrDefault(i => i.Value?.ToString() == x.NewValue.Value?.ToString());
             if (item == null)
             {
@@ -50,6 +52,7 @@ public partial class ComboBoxAndSearchControl : UserControl
 
         ItemsProperty.Changed.Subscribe(x =>
         {
+            if (x.Sender != this || !x.NewValue.HasValue) return;
             var newItems = x.NewValue.Value;
 
             if (newItems.Count == 0)
