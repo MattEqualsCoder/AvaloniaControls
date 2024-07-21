@@ -44,7 +44,7 @@
                                         <controls:ImageButton Click="IconButton_OnClick">
                                             <avalonia:MaterialIcon Kind="Usb" Width="20" Height="20" Background="Transparent"></avalonia:MaterialIcon>
                                         </controls:ImageButton>
-                                        <Button Click="HeaderButton_OnClick">Button!</Button>    
+                                        <Button Click="HeaderButton_OnClick" IsDefault="True">Button!</Button>    
                                     </StackPanel>
                                     
                                 </controls:CardControl.HeaderButtons>
@@ -130,6 +130,17 @@
                                     
                                     <controls:LabeledControl Text="Numeric Up Down (No Mouse Scroll)">
                                         <controls:NumericUpDownNoScroll Value="{Binding ValueNoScroll}"></controls:NumericUpDownNoScroll>
+                                    </controls:LabeledControl>
+                                    
+                                    <controls:LabeledControl Text="Numeric Text Box">
+                                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto, Auto, Auto">
+                                            <controls:NumericTextBox Grid.Row="0" Grid.Column="0" Value="{Binding NumericTextBoxDouble}"></controls:NumericTextBox>
+                                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding NumericTextBoxDouble}"></Label>
+                                            <controls:NumericTextBox Grid.Row="1" Grid.Column="0" IsInteger="True" IsPositiveOnly="True" Value="{Binding NumericTextBoxInt}"></controls:NumericTextBox>
+                                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding NumericTextBoxInt}"></Label>
+                                            <controls:NumericTextBox Grid.Row="2" Grid.Column="0" IsTime="True" Value="{Binding NumericTextBoxTime}"></controls:NumericTextBox>
+                                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding NumericTextBoxTime}"></Label>
+                                        </Grid>
                                     </controls:LabeledControl>
                                     
                                     <controls:LabeledControl Text="Combo Box and Search Control">

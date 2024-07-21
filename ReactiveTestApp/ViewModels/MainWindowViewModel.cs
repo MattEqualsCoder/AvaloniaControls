@@ -42,6 +42,12 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public int TimeInSeconds { get; set; }
     
     [Reactive] public int ValueNoScroll { get; set; }
+    
+    [Reactive] public double NumericTextBoxDouble { get; set; }
+    
+    [Reactive] public int NumericTextBoxInt { get; set; }
+    
+    [Reactive] public int NumericTextBoxTime { get; set; }
 
     [Reactive]
     public List<ComboBoxAndSearchItem> SearchItems { get; set; } =
