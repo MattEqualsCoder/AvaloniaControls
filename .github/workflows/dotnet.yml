@@ -1,0 +1,47 @@
+name: .NET Build + Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore  --configuration Release -p:PostBuildEvent= 
+    - name: Publish Windows 64bit
+      if: ${{ github.event_name != 'pull_request' }}
+      run: dotnet publish --os win --arch x64 -c Release -f net9.0 --self-contained false ReactiveTestApp/ReactiveTestApp.csproj
+    - name: Get version number
+      if: ${{ github.event_name != 'pull_request' }}
+      id: version
+      run: |
+        $version = (Get-Item "AvaloniaControls/bin/Release/net9.0/AvaloniaControls.dll").VersionInfo.ProductVersion
+        $version = $version -replace "\+.*", ""
+        Write-Output "number=$version" >> $env:GITHUB_OUTPUT
+      shell: pwsh
+    - name: Copy Nuget Packages
+      if: ${{ github.event_name != 'pull_request' }}
+      shell: pwsh
+      run: |
+        $outputDir = "$pwd\Output\"
+        New-Item -ItemType Directory -Force -Path $outputDir
+        Copy-Item -Path AvaloniaControls/bin/Release/*.nupkg -Destination $outputDir
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "Output/*"
+        name: AvaloniaControls_${{ steps.version.outputs.number }}
