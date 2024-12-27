@@ -16,7 +16,7 @@
                 <ContentPresenter Content="{TemplateBinding Content}">
                     <ContentPresenter.Styles>
                         <Style Selector="TextBlock">
-                            <Setter Property="Foreground" Value="{TemplateBinding Foreground}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource LinkColor}"/>
                             <Setter Property="FontSize" Value="{TemplateBinding FontSize}"/>
                             <Setter Property="TextDecorations" Value="Underline"/>
                             <Setter Property="TextWrapping" Value="Wrap"></Setter>
