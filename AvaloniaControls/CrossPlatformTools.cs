@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 
 namespace AvaloniaControls;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class CrossPlatformTools
 {
     /// <summary>
@@ -102,8 +102,9 @@ public class CrossPlatformTools
     /// <param name="path">The initial path</param>
     /// <param name="title">The title of the dialog, if desired</param>
     /// <param name="warnOnOverwrite">If the save dialog should warn about overwrites</param>
+    /// <param name="caseSensitiveFilter">If the filter pattern should be made to be case-sensitive</param>
     /// <returns></returns>
-    public static async Task<IStorageItem?> OpenFileDialogAsync(Window parentWindow, FileInputControlType type, string? filter, string? path, string? title = null, bool warnOnOverwrite = true)
+    public static async Task<IStorageItem?> OpenFileDialogAsync(Window parentWindow, FileInputControlType type, string? filter, string? path, string? title = null, bool warnOnOverwrite = true, bool caseSensitiveFilter = false)
     {
         if (!string.IsNullOrEmpty(path) && (File.Exists(path) || Directory.Exists(path)))
         {
@@ -124,7 +125,7 @@ public class CrossPlatformTools
             var files = await parentWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
                 Title = title ?? "Select File",
-                FileTypeFilter = ParseFilter(filter),
+                FileTypeFilter = ParseFilter(filter, caseSensitiveFilter),
                 SuggestedStartLocation = folder,
             });
             
@@ -138,7 +139,7 @@ public class CrossPlatformTools
             var file = await parentWindow.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
                 Title = title ?? "Save File",
-                FileTypeChoices = ParseFilter(filter),
+                FileTypeChoices = ParseFilter(filter, caseSensitiveFilter),
                 ShowOverwritePrompt = warnOnOverwrite,
                 SuggestedStartLocation = folder,
             });
@@ -165,7 +166,7 @@ public class CrossPlatformTools
         return null;
     }
     
-    private static List<FilePickerFileType>? ParseFilter(string? filter)
+    private static List<FilePickerFileType>? ParseFilter(string? filter, bool caseSensitiveFilter = false)
     {
         if (string.IsNullOrEmpty(filter))
         {
@@ -185,7 +186,19 @@ public class CrossPlatformTools
                 }
 
                 var patterns = filterParts[1].Split(",").Select(x => x.Trim()).ToArray();
-                toReturn.Add(new FilePickerFileType(filterParts[0].Trim()) { Patterns = patterns });
+
+                var text = filterParts[0].Trim();
+                if (!text.Contains('('))
+                {
+                    text += " (" + string.Join(", ", patterns) + ")";
+                }
+                
+                if (!OperatingSystem.IsWindows() && !caseSensitiveFilter)
+                {
+                    patterns = patterns.SelectMany(CasePermutation).ToArray();
+                }
+                
+                toReturn.Add(new FilePickerFileType(text) { Patterns = patterns });
             }
         }
         else
@@ -201,11 +214,51 @@ public class CrossPlatformTools
             {
                 var description = parts[i].Trim();
                 var patterns = parts[i + 1].Split(";").Select(x => x.Trim()).ToList();
+
+                if (!OperatingSystem.IsWindows() && !caseSensitiveFilter)
+                {
+                    patterns = patterns.SelectMany(CasePermutation).ToList();
+                }
+                
                 toReturn.Add(new FilePickerFileType(description) { Patterns = patterns });
             }
         }
         
 
         return toReturn;
+    }
+
+    private static List<string> CasePermutation(string input)
+    {
+        var lower = input.ToLower().ToCharArray();
+        var upper = input.ToUpper().ToCharArray();
+        return GetIndexCombinations(lower, upper).Select(x => new string(x)).Distinct().ToList();
+    }
+    
+    private static List<char[]> GetIndexCombinations(char[] a, char[] b)
+    {
+        if (a.Length != b.Length)
+        {
+            throw new ArgumentException("Arrays A and B must have the same length.");
+        }
+
+        var result = new List<char[]>();
+        int n = a.Length;
+
+        // Generate all combinations using a bitmask approach
+        int totalCombinations = 1 << n; // 2^n combinations
+
+        for (var mask = 0; mask < totalCombinations; mask++)
+        {
+            var combination = new char[n];
+            for (var i = 0; i < n; i++)
+            {
+                // Use the bitmask to decide whether to pick from A or B
+                combination[i] = (mask & (1 << i)) != 0 ? b[i] : a[i];
+            }
+            result.Add(combination);
+        }
+
+        return result;
     }
 }

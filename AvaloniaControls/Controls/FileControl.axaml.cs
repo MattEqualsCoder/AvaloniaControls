@@ -154,6 +154,15 @@ public partial class FileControl : UserControl
         get => GetValue(FileValidationHashErrorProperty);
         set => SetValue(FileValidationHashErrorProperty, value);
     }
+    
+    public static readonly StyledProperty<bool> CaseSensitiveFilterProperty = AvaloniaProperty.Register<FileControl, bool>(
+        nameof(CaseSensitiveFilter), true);
+
+    public bool CaseSensitiveFilter
+    {
+        get => GetValue(CaseSensitiveFilterProperty);
+        set => SetValue(CaseSensitiveFilterProperty, value);
+    }
 
     public event EventHandler<FileControlUpdatedEventArgs>? OnUpdated;
 
@@ -237,7 +246,7 @@ public partial class FileControl : UserControl
         }
 
         var selectedPath = await CrossPlatformTools.OpenFileDialogAsync(_window, FileInputType, Filter, locationPath, DialogTitle,
-            WarnOnOverwrite);
+            WarnOnOverwrite, CaseSensitiveFilter);
 
         if (selectedPath == null)
         {
@@ -281,7 +290,7 @@ public partial class FileControl : UserControl
             {
                 var regexParts = Filter.Split(";").Select(x => x.Split(":")[1].Replace(".", "\\.").Replace("*", ".*")).SelectMany(x => x.Split(",")).Select(x => x.Trim());
                 var regex = $"({string.Join("|", regexParts)})";
-                return Regex.IsMatch(file, regex, OperatingSystem.IsWindows() ? RegexOptions.None : RegexOptions.IgnoreCase);
+                return Regex.IsMatch(file, regex, OperatingSystem.IsWindows() || !CaseSensitiveFilter ? RegexOptions.IgnoreCase : RegexOptions.None);
             }
             catch
             {
@@ -294,7 +303,7 @@ public partial class FileControl : UserControl
             {
                 var regexParts = Filter.Split("|").Select(x => x.Split("(").Last().Replace(")", "").Replace(".", "\\.").Replace("*", ".*")).SelectMany(x => x.Split(",")).Select(x => x.Trim());
                 var regex = $"({string.Join("|", regexParts)})";
-                return Regex.IsMatch(file, regex, OperatingSystem.IsWindows() ? RegexOptions.None : RegexOptions.IgnoreCase);
+                return Regex.IsMatch(file, regex, OperatingSystem.IsWindows() || !CaseSensitiveFilter ? RegexOptions.IgnoreCase : RegexOptions.None);
             }
             catch
             {

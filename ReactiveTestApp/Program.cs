@@ -57,6 +57,7 @@ sealed class Program
         try
         {
            BuildAvaloniaApp()
+               .With(new X11PlatformOptions() { UseDBusFilePicker = false })
                 .StartWithClassicDesktopLifetime(args);
         }
         catch (Exception e)
