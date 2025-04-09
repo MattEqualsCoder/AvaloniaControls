@@ -10,6 +10,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
+using AvaloniaControls.Extensions;
 using AvaloniaControls.Models;
 using File = System.IO.File;
 
@@ -362,28 +363,32 @@ public partial class FileControl : UserControl
 
     }
 
-    private void TextBox_OnTextChanging(object? sender, TextChangingEventArgs e)
+    private async void TextBox_OnPastingFromClipboard(object? sender, RoutedEventArgs e)
     {
-        if (sender is not TextBox textBox || textBox.Text == FilePath) return;
-        if (string.IsNullOrEmpty(textBox.Text) && ShowClearButton)
+        try
         {
-            FilePath = "";
-            return;
+            if (sender is not TextBox textBox) return;
+        
+            var topLevel = TopLevel.GetTopLevel(this);
+            if (topLevel?.Clipboard == null)
+            {
+                return;
+            }
+            
+            var text = await topLevel.GetClipboardAsync() ?? await topLevel.Clipboard.GetTextAsync() ?? "";
+            if (text.StartsWith('"') && text.EndsWith('"'))
+            {
+                text = text.Substring(1, text.Length - 2);
+            }
+        
+            if (!ValidateAndSetPath(text))
+            {
+                textBox.Text = FilePath;
+            }
         }
-
-        var text = textBox.Text ?? "";
-        if (text.StartsWith('"') && text.EndsWith('"'))
+        catch
         {
-            text = text.Substring(1, text.Length - 2);
-        }
-
-        if (!ValidateAndSetPath(text))
-        {
-            textBox.Text = FilePath;
-        }
-        else if (textBox.Text != text)
-        {
-            textBox.Text = text;
+            // Do nothing
         }
     }
 }
