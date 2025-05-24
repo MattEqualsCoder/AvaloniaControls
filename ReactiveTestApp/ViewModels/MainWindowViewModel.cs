@@ -83,6 +83,10 @@ public class MainWindowViewModel : ViewModelBase
     public Func<string, string>? UpdateEnumDescription => s => s + " Updated";
 
     public Func<Enum?, bool> FilterEnum => a => a != null && (TestEnums)a is TestEnums.ValueOne or TestEnums.ValueTwo;
+
+    [Reactive] public bool CheckboxTest { get; set; } = true;
+
+    [Reactive] public bool? NullableCheckboxTest { get; set; }
 }
 
 public enum TestEnums

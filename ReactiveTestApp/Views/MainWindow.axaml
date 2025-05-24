@@ -164,6 +164,29 @@
                                         <ComboBox ItemsSource="{Binding LinkedEventDropdown}" SelectedValue="{Binding LinkedEventSelection}"></ComboBox>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="Icon Checkboxes">
+                                        <StackPanel Orientation="Vertical">
+                                            <controls:IconCheckbox Text="Basic Icon Checkbox" Value="{Binding CheckboxTest}" />
+                                            <controls:IconCheckbox 
+                                                Text="Nullable Icon Checkbox"
+                                                Value="{Binding NullableCheckboxTest}"
+                                                AllowNulls="True" 
+                                                CheckedBrush="LimeGreen"
+                                                UncheckedBrush="IndianRed"
+                                                NullBrush="Goldenrod"
+                                                UncheckedIconKind="CancelBoxOutline"
+                                                CheckedText="Nullable Icon Checkbox (True)"
+                                                UncheckedText="Nullable Icon Checkbox (False)"
+                                                NullText="Nullable Icon Checkbox (Null)"
+                                            />
+                                            <controls:IconCheckbox
+                                                PrefixIconKind="Eye"
+                                                ToolTip.Tip="Checkbox with a prefix icon"
+                                            ></controls:IconCheckbox>
+                                            <CheckBox>Hello</CheckBox>
+                                        </StackPanel>
+                                    </controls:LabeledControl>
+                                    
                                     <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
                                         <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                                         

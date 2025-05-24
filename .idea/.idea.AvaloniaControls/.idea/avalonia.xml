@@ -14,6 +14,7 @@
         <entry key="AvaloniaControls/Controls/ExpanderControlToggle.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/FileControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/HeaderFooter.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
+        <entry key="AvaloniaControls/Controls/IconCheckbox.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/ImageButton.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/LabeledControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />
         <entry key="AvaloniaControls/Controls/LinkControl.axaml" value="ReactiveTestApp/ReactiveTestApp.csproj" />

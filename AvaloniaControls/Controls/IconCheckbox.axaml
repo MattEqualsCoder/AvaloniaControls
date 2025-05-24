@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:controls="clr-namespace:AvaloniaControls.Controls"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="50"
+             x:Name="This"
+             x:Class="AvaloniaControls.Controls.IconCheckbox">
+    <controls:ImageButton Click="Button_OnClick">
+        <Grid ColumnDefinitions="Auto, *">
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <avalonia:MaterialIcon 
+                    Kind="{Binding ElementName=This, Path=PrefixIconKind}"
+                    IsVisible="False"
+                    x:Name="PrefixIcon"
+                    Background="Transparent"
+                />
+                <avalonia:MaterialIcon x:Name="MainIcon" Kind="CheckboxOutline" Background="Transparent"/>
+            </StackPanel>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" Name="MainTextBlock" Text="Test" Margin="2 0 0 0"/>
+        </Grid>
+    </controls:ImageButton>
+</UserControl>
