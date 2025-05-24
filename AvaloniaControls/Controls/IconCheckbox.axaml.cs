@@ -13,10 +13,10 @@ public partial class IconCheckbox : UserControl
     public IconCheckbox()
     {
         InitializeComponent();
-        
-        if (Design.IsDesignMode)
+
+        if (Design.IsDesignMode && string.IsNullOrEmpty(Text) && PrefixIconKind == null)
         {
-            Text = "Checkbox Text";
+            Text = "DesignMode Checkbox Text";
         }
 
         if (!AllowNulls && Value is null)

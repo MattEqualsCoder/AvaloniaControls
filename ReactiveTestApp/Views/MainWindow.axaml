@@ -181,9 +181,9 @@
                                             />
                                             <controls:IconCheckbox
                                                 PrefixIconKind="Eye"
-                                                ToolTip.Tip="Checkbox with a prefix icon"
+                                                ToolTip.Tip="Checkbox with a prefix icon. You must include Text=&quot;&quot; to avoid the default design mode text appearing."
+                                                Text=""
                                             ></controls:IconCheckbox>
-                                            <CheckBox>Hello</CheckBox>
                                         </StackPanel>
                                     </controls:LabeledControl>
                                     
