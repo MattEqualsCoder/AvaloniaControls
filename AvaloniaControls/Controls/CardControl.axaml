@@ -11,18 +11,20 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Margin="{TemplateBinding Margin}">
+                <Grid Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
                    
                     <Border BorderBrush="{DynamicResource CardBorderColor}"
                             BorderThickness="3"
                             CornerRadius="5"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
                     >
-                        <StackPanel>
+                        <DockPanel VerticalAlignment="{TemplateBinding VerticalAlignment}">
                     
                             <Border Background="{DynamicResource CardBorderColor}"
                                     BorderBrush="{DynamicResource CardBorderColor}"
                                     BorderThickness="0 0 0 3"
                                     CornerRadius="4 4 0 0"
+                                    DockPanel.Dock="Top"
                             >
                                 <Grid ColumnDefinitions="*,Auto">
                                     
@@ -35,15 +37,15 @@
                                 
                             </Border>
                             
-                            <Border Background="{DynamicResource CardBackgroundColor}" IsVisible="{TemplateBinding IsContentVisible}">
-                                <ContentPresenter Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}"></ContentPresenter>
+                            <Border Background="{DynamicResource CardBackgroundColor}" IsVisible="{TemplateBinding IsContentVisible}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                <ContentPresenter Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
                             </Border>
                     
                             
-                        </StackPanel>
+                        </DockPanel>
                 
                     </Border>
-                </StackPanel>
+                </Grid>
                 
             </ControlTemplate>
             

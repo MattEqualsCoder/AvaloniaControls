@@ -5,7 +5,7 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.6.1</Version>
+        <Version>1.6.2</Version>
         <PackageId>MattEqualsCoder.AvaloniaControls</PackageId>
         <Title>Avalonia Controls</Title>
         <Authors>MattEqualsCoder</Authors>

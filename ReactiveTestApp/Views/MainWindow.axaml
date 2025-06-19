@@ -221,7 +221,9 @@
                 </DockPanel>
             </TabItem>
             <TabItem Header="Tab Two">
-                <TextBlock>testing</TextBlock>
+                <controls:CardControl HeaderText="Test" VerticalAlignment="Stretch" VerticalContentAlignment="Top">
+                    <TextBlock Background="DimGray" Margin="5" Padding="5">Text</TextBlock>
+                </controls:CardControl>
             </TabItem>
         </TabControl>
         
