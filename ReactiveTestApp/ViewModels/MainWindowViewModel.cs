@@ -87,6 +87,8 @@ public class MainWindowViewModel : ViewModelBase
     [Reactive] public bool CheckboxTest { get; set; } = true;
 
     [Reactive] public bool? NullableCheckboxTest { get; set; }
+    
+    [Reactive] public bool MenuItemCheckboxTest { get; set; }
 }
 
 public enum TestEnums

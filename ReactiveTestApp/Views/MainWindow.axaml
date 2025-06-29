@@ -211,7 +211,18 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button Click="UIExceptionButton_OnClick" Margin="0 0 10 0">Throw UI Exception</Button>
                                         <Button Click="TaskExceptionButton_OnClick" Margin="0 0 10 0">Throw Task Exception</Button>
-                                        <Button Click="TestMappingsButton_OnClick">Test Mappings</Button>
+                                        <Button Click="TestMappingsButton_OnClick" Margin="0 0 10 0">Test Mappings</Button>
+                                        <controls:ContextMenuButton>
+                                            <controls:ContextMenuButton.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="A" IsChecked="True" />
+                                                    <controls:IconMenuItem Header="B" IconKind="About"></controls:IconMenuItem>
+                                                    <controls:CheckedMenuItem Header="C" IsChecked="True"></controls:CheckedMenuItem>
+                                                    <controls:CheckedMenuItem Header="C" IsChecked="{Binding MenuItemCheckboxTest}" Click="MenuItem_OnClick"></controls:CheckedMenuItem>
+                                                </ContextMenu>
+                                            </controls:ContextMenuButton.ContextMenu>
+                                            Context Menu Button
+                                        </controls:ContextMenuButton>
                                     </StackPanel>
                                     
                                 </StackPanel>
