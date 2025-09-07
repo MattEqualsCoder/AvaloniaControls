@@ -1,6 +1,9 @@
+using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using AvaloniaControls;
 using AvaloniaControls.Controls;
 using AvaloniaControls.Extensions;
@@ -145,5 +148,35 @@ public partial class MainWindow : RestorableWindow
     private void MenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
         _model.MenuItemCheckboxTest = !_model.MenuItemCheckboxTest;
+    }
+
+    private void InfiniteLoadingButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Message = "Loading Message",
+            ProgressBar = MessageWindowProgressBarType.Indeterminate,
+            PrimaryButtonText = "Cancel"
+        });
+        window.ShowDialog(this);
+    }
+
+    private void RegularLoadingButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Message = "Loading Message",
+            ProgressBar = MessageWindowProgressBarType.Normal,
+            PrimaryButtonText = "Cancel"
+        });
+        window.ShowDialog(this);
+
+        Dispatcher.UIThread.Invoke(async () =>
+        {
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            window.UpdateProgressBar(50);
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            window.UpdateProgressBar(100);
+        });
     }
 }

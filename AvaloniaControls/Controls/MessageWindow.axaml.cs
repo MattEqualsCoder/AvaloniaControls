@@ -178,6 +178,11 @@ public partial class MessageWindow : ScalableWindow
         return window.DialogResult;
     }
 
+    public void UpdateProgressBar(double newValue)
+    {
+        LoadingBar.Value = newValue;
+    }
+
     private void Button1_OnClick(object? sender, RoutedEventArgs e)
     {
         DialogResult = new MessageWindowResult()

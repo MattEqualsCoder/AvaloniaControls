@@ -13,6 +13,12 @@ public class MessageWindowRequest
     public string? LinkText { get; init; }
     public string? LinkUrl { get; set; }
     public bool DisplayLink => !string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkUrl);
+    public string? PrimaryButtonText { get; init; }
+    public string? SecondaryButtonText { get; init; }
+    public MessageWindowProgressBarType ProgressBar { get; init; }
+    public bool DisplayProgressBar => ProgressBar != MessageWindowProgressBarType.None;
+    public bool ProgressBarIndeterminate => ProgressBar == MessageWindowProgressBarType.Indeterminate;
+    
     
     public string WindowTitle
     {
@@ -59,6 +65,11 @@ public class MessageWindowRequest
     {
         get
         {
+            if (!string.IsNullOrEmpty(PrimaryButtonText))
+            {
+                return PrimaryButtonText;
+            }
+            
             return Buttons switch
             {
                 MessageWindowButtons.OK => "OK",
@@ -74,6 +85,11 @@ public class MessageWindowRequest
     {
         get
         {
+            if (!string.IsNullOrEmpty(SecondaryButtonText))
+            {
+                return SecondaryButtonText;
+            }
+            
             return Buttons switch
             {
                 MessageWindowButtons.YesNo => "No",

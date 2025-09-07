@@ -45,6 +45,11 @@
                           IsVisible="{Binding IsCheckBoxVisible}" 
                           Margin="0 5 0 5" 
                           Content="{Binding CheckBoxText}" />
+                <ProgressBar Name="LoadingBar"
+                             Margin="0 5 0 0"
+                             IsVisible="{Binding DisplayProgressBar}"
+                             IsIndeterminate="{Binding ProgressBarIndeterminate}"
+                             />
             </StackPanel>
         </DockPanel>
     </LayoutTransformControl>

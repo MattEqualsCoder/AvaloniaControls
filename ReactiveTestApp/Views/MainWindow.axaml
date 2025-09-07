@@ -187,12 +187,16 @@
                                         </StackPanel>
                                     </controls:LabeledControl>
                                     
-                                    <Grid ColumnDefinitions="*, *, *" Margin="0 10 0 10">
+                                    <Grid ColumnDefinitions="*, *, *, *, *" Margin="0 10 0 10">
                                         <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                                         
                                         <controls:LinkControl Grid.Column="1" Click="LargeMessageBoxButton_OnClick" HorizontalAlignment="Center">Open Large Message Box</controls:LinkControl>
                                         
                                         <controls:LinkControl Grid.Column="2" Click="CheckboxMessageBoxButton_OnClick" HorizontalAlignment="Right">Open CheckBox Message Box</controls:LinkControl>
+                                        
+                                        <controls:LinkControl Grid.Column="3" Click="InfiniteLoadingButton_OnClick" HorizontalAlignment="Right">Open Infinite Loading Message Box</controls:LinkControl>
+                                        
+                                        <controls:LinkControl Grid.Column="4" Click="RegularLoadingButton_OnClick" HorizontalAlignment="Right">Open Loading Message Box</controls:LinkControl>
                                     </Grid>
                                     <TextBlock Text="{Binding MessageBoxResultDisplayText}"></TextBlock>
                                     
