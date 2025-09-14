@@ -187,16 +187,18 @@
                                         </StackPanel>
                                     </controls:LabeledControl>
                                     
-                                    <Grid ColumnDefinitions="*, *, *, *, *" Margin="0 10 0 10">
-                                        <controls:LinkControl Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
+                                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="*, *" Margin="0 10 0 10">
+                                        <controls:LinkControl Grid.Row="0" Grid.Column="0" Click="BasicMessageBoxButton_OnClick">Open Basic Message Box</controls:LinkControl>
                                         
-                                        <controls:LinkControl Grid.Column="1" Click="LargeMessageBoxButton_OnClick" HorizontalAlignment="Center">Open Large Message Box</controls:LinkControl>
+                                        <controls:LinkControl Grid.Row="0" Grid.Column="1" Click="LargeMessageBoxButton_OnClick" HorizontalAlignment="Center">Open Large Message Box</controls:LinkControl>
                                         
-                                        <controls:LinkControl Grid.Column="2" Click="CheckboxMessageBoxButton_OnClick" HorizontalAlignment="Right">Open CheckBox Message Box</controls:LinkControl>
+                                        <controls:LinkControl Grid.Row="0" Grid.Column="2" Click="CheckboxMessageBoxButton_OnClick" HorizontalAlignment="Right">Open CheckBox Message Box</controls:LinkControl>
                                         
-                                        <controls:LinkControl Grid.Column="3" Click="InfiniteLoadingButton_OnClick" HorizontalAlignment="Right">Open Infinite Loading Message Box</controls:LinkControl>
+                                        <controls:LinkControl Grid.Row="1" Grid.Column="0" Click="InfiniteLoadingButton_OnClick" HorizontalAlignment="Left">Open Infinite Loading Message Box</controls:LinkControl>
                                         
-                                        <controls:LinkControl Grid.Column="4" Click="RegularLoadingButton_OnClick" HorizontalAlignment="Right">Open Loading Message Box</controls:LinkControl>
+                                        <controls:LinkControl Grid.Row="1" Grid.Column="1" Click="RegularLoadingButton_OnClick" HorizontalAlignment="Center">Open Loading Message Box</controls:LinkControl>
+                                        
+                                        <controls:LinkControl Grid.Row="1" Grid.Column="2" Click="UpdateMessageWindowButton_OnClick" HorizontalAlignment="Right">Open Message Box With Updates</controls:LinkControl>
                                     </Grid>
                                     <TextBlock Text="{Binding MessageBoxResultDisplayText}"></TextBlock>
                                     

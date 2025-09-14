@@ -179,4 +179,25 @@ public partial class MainWindow : RestorableWindow
             window.UpdateProgressBar(100);
         });
     }
+
+    private void UpdateMessageWindowButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Message = "Loading Message",
+            PrimaryButtonText = "Cancel"
+        });
+        window.ShowDialog(this);
+
+        Dispatcher.UIThread.Invoke(async () =>
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            window.UpdateMessageText("Update 1");
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            window.UpdatePrimaryButtonText("Update 2");
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            window.UpdateSecondaryButtonText("Update 3");
+            window.ToggleSecondaryButton(true);
+        });
+    }
 }

@@ -183,6 +183,26 @@ public partial class MessageWindow : ScalableWindow
         LoadingBar.Value = newValue;
     }
 
+    public void UpdatePrimaryButtonText(string newValue)
+    {
+        Button1.Content = newValue;
+    }
+    
+    public void UpdateSecondaryButtonText(string newValue)
+    {
+        Button2.Content = newValue;
+    }
+
+    public void UpdateMessageText(string newValue)
+    {
+        MessageTextBlock.Text = newValue;
+    }
+
+    public void ToggleSecondaryButton(bool isVisible)
+    {
+        Button2.IsVisible = isVisible;
+    }
+
     private void Button1_OnClick(object? sender, RoutedEventArgs e)
     {
         DialogResult = new MessageWindowResult()

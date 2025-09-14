@@ -30,9 +30,12 @@
             </Border>
             
             <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-                <TextBlock VerticalAlignment="Center" 
-                           TextWrapping="Wrap" 
-                           Text="{Binding Message}" />
+                <TextBlock 
+                    Name="MessageTextBlock"
+                    VerticalAlignment="Center" 
+                    TextWrapping="Wrap" 
+                    Text="{Binding Message}"
+                />
                 <controls:LinkControl Name="ResponseLink"
                                       Content="{Binding LinkText}"
                                       IsVisible="{Binding DisplayLink}"
