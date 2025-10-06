@@ -200,4 +200,16 @@ public partial class MainWindow : RestorableWindow
             window.ToggleSecondaryButton(true);
         });
     }
+
+    private void MessageWindowTripleButtonsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var window = new MessageWindow(new MessageWindowRequest()
+        {
+            Message = "Loading Message",
+            Buttons = MessageWindowButtons.YesNoCancel,
+            PrimaryButtonText = "Save",
+            SecondaryButtonText = "Don't Save"
+        });
+        window.ShowDialog(this);
+    }
 }

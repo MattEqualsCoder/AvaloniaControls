@@ -21,6 +21,7 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Name="Button1" Click="Button1_OnClick" Margin="5 0" Content="{Binding FirstButtonText}" />
                         <Button Name="Button2" Click="Button2_OnClick" Margin="5 0" Content="{Binding SecondButtonText}" IsVisible="{Binding IsSecondButtonVisible}" />
+                        <Button Name="Button3" Click="Button3_OnClick" Margin="5 0" Content="{Binding ThirdButtonText}" IsVisible="{Binding IsThirdButtonVisible}" />
                     </StackPanel>
                 </StackPanel>
             </Border>

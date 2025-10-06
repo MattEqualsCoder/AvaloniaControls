@@ -192,6 +192,11 @@ public partial class MessageWindow : ScalableWindow
     {
         Button2.Content = newValue;
     }
+    
+    public void UpdateTertiaryButtonText(string newValue)
+    {
+        Button3.Content = newValue;
+    }
 
     public void UpdateMessageText(string newValue)
     {
@@ -202,12 +207,17 @@ public partial class MessageWindow : ScalableWindow
     {
         Button2.IsVisible = isVisible;
     }
+    
+    public void ToggleTertiaryButton(bool isVisible)
+    {
+        Button3.IsVisible = isVisible;
+    }
 
     private void Button1_OnClick(object? sender, RoutedEventArgs e)
     {
         DialogResult = new MessageWindowResult()
         {
-            PressedAcceptButton = true,
+            PressedButton = ButtonType.Primary,
             CheckedBox = this.FindControl<CheckBox>(nameof(ResponseCheckBox))?.IsChecked == true,
             ResponseText = this.FindControl<TextBox>(nameof(ResponseTextBox))?.Text
         };
@@ -218,7 +228,18 @@ public partial class MessageWindow : ScalableWindow
     {
         DialogResult = new MessageWindowResult()
         {
-            PressedAcceptButton = false,
+            PressedButton = ButtonType.Secondary,
+            CheckedBox = this.FindControl<CheckBox>(nameof(ResponseCheckBox))?.IsChecked == true,
+            ResponseText = this.FindControl<TextBox>(nameof(ResponseTextBox))?.Text
+        };
+        Close(DialogResult);
+    }
+    
+    private void Button3_OnClick(object? sender, RoutedEventArgs e)
+    {
+        DialogResult = new MessageWindowResult()
+        {
+            PressedButton = ButtonType.Tertiary,
             CheckedBox = this.FindControl<CheckBox>(nameof(ResponseCheckBox))?.IsChecked == true,
             ResponseText = this.FindControl<TextBox>(nameof(ResponseTextBox))?.Text
         };

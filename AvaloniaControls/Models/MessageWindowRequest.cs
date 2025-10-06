@@ -15,11 +15,12 @@ public class MessageWindowRequest
     public bool DisplayLink => !string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkUrl);
     public string? PrimaryButtonText { get; init; }
     public string? SecondaryButtonText { get; init; }
+    public string? TertiaryButtonText { get; init; }
     public MessageWindowProgressBarType ProgressBar { get; init; }
     public bool DisplayProgressBar => ProgressBar != MessageWindowProgressBarType.None;
     public bool ProgressBarIndeterminate => ProgressBar == MessageWindowProgressBarType.Indeterminate;
-    
-    
+
+
     public string WindowTitle
     {
         get
@@ -58,9 +59,11 @@ public class MessageWindowRequest
     public bool IsIconVisible => Icon != MessageWindowIcon.None;
 
     public bool IsCheckBoxVisible => !string.IsNullOrWhiteSpace(CheckBoxText);
-    
-    public bool IsSecondButtonVisible => Buttons is MessageWindowButtons.YesNo or MessageWindowButtons.OKCancel;
 
+    public bool IsSecondButtonVisible => Buttons is MessageWindowButtons.YesNo or MessageWindowButtons.OKCancel or MessageWindowButtons.YesNoCancel;
+
+    public bool IsThirdButtonVisible => Buttons == MessageWindowButtons.YesNoCancel;
+    
     public string FirstButtonText
     {
         get
@@ -69,18 +72,19 @@ public class MessageWindowRequest
             {
                 return PrimaryButtonText;
             }
-            
+
             return Buttons switch
             {
                 MessageWindowButtons.OK => "OK",
                 MessageWindowButtons.YesNo => "Yes",
+                MessageWindowButtons.YesNoCancel => "Yes",
                 MessageWindowButtons.OKCancel => "OK",
                 MessageWindowButtons.Close => "Close",
                 _ => "OK"
             };
         }
     }
-    
+
     public string SecondButtonText
     {
         get
@@ -89,13 +93,32 @@ public class MessageWindowRequest
             {
                 return SecondaryButtonText;
             }
-            
+
             return Buttons switch
             {
                 MessageWindowButtons.YesNo => "No",
+                MessageWindowButtons.YesNoCancel => "No",
                 MessageWindowButtons.OKCancel => "Cancel",
                 _ => ""
             };
         }
     }
+
+    public string ThirdButtonText
+    {
+        get
+        {
+            if (!string.IsNullOrEmpty(TertiaryButtonText))
+            {
+                return TertiaryButtonText;
+            }
+
+            return Buttons switch
+            {
+                MessageWindowButtons.YesNoCancel => "Cancel",
+                _ => ""
+            };
+        }
+    }
+
 }

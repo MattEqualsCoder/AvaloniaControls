@@ -5,5 +5,6 @@ public enum MessageWindowButtons
     OK,
     YesNo,
     OKCancel,
-    Close
+    Close,
+    YesNoCancel,
 }
