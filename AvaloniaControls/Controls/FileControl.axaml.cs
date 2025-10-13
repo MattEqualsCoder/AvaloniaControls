@@ -216,17 +216,28 @@ public partial class FileControl : UserControl
 
         var locationPath = "";
 
-        if (!string.IsNullOrEmpty(FilePath) && (File.Exists(FilePath) || Directory.Exists(FilePath)))
+        if (!string.IsNullOrEmpty(FilePath))
         {
-            var attr = File.GetAttributes(FilePath);
-            if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+            if (File.Exists(FilePath) || Directory.Exists(FilePath))
             {
-                locationPath = FilePath;
+                var attr = File.GetAttributes(FilePath);
+                if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                {
+                    locationPath = FilePath;
+                }
+                else
+                {
+                    var file = new FileInfo(FilePath);
+                    locationPath = file.DirectoryName;
+                }
             }
             else
             {
-                var file = new FileInfo(FilePath);
-                locationPath = file.DirectoryName;
+                var parent = Path.GetDirectoryName(FilePath);
+                if (Directory.Exists(parent))
+                {
+                    locationPath = parent;
+                }
             }
         }
 

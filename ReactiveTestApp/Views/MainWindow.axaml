@@ -64,6 +64,17 @@
                                         </controls:FileControl>
                                     </controls:LabeledControl>
                                     
+                                    <controls:LabeledControl Text="Save File Control">
+                                        <controls:FileControl 
+                                            OnUpdated="FileControl_OnOnUpdated" 
+                                            Filter="Text Files:*.txt,*.log;All files:*.*" 
+                                            FilePath="{Binding TestPath}" 
+                                            CaseSensitiveFilter="False"
+                                            FileInputType="SaveFile"
+                                        >
+                                        </controls:FileControl>
+                                    </controls:LabeledControl>
+                                    
                                     <controls:LabeledControl Text="Folder Control">
                                         <controls:FileControl OnUpdated="FileControl_OnOnUpdated" FileInputType="Folder" FilePath="{Binding FolderPath}">
                                         </controls:FileControl>
