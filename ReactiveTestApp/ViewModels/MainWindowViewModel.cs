@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using AvaloniaControls.Controls;
 using AvaloniaControls.Models;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace ReactiveTestApp.ViewModels;
 

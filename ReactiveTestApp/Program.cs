@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.ReactiveUI;
 using System;
 using System.IO;
 using System.Threading;
@@ -13,6 +12,7 @@ using AvaloniaControls.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReactiveTestApp.Views;
+using ReactiveUI.Avalonia;
 using Serilog;
 
 namespace ReactiveTestApp;

@@ -1,7 +1,7 @@
 ﻿using AvaloniaControls;
 using AvaloniaControls.Extensions;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace ReactiveTestApp.ViewModels;
 

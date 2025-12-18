@@ -27,7 +27,6 @@ public static class ServiceCollectionExtensions
     {
         return services.AddControlServices<TAssembly>()
             .AddSingleton<ITaskService, TaskService>()
-            .AddSingleton<IControlServiceFactory, ControlServiceFactory>()
-            .AddAutoMapper(x => x.AddProfile(new ViewModelMapperConfig<TAssembly>()));
+            .AddSingleton<IControlServiceFactory, ControlServiceFactory>();
     }
 }

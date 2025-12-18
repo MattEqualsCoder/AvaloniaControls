@@ -140,11 +140,6 @@ public partial class MainWindow : RestorableWindow
         _service?.Log("Icon button clicked");
     }
 
-    private void TestMappingsButton_OnClick(object? sender, RoutedEventArgs e)
-    {
-        _service?.TestMapping();
-    }
-
     private void MenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
         _model.MenuItemCheckboxTest = !_model.MenuItemCheckboxTest;
