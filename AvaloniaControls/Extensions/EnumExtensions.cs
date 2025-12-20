@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace AvaloniaControls;
+namespace AvaloniaControls.Extensions;
 
 public static class EnumExtensions
 {

@@ -80,7 +80,7 @@
                                         </controls:FileControl>
                                     </controls:LabeledControl>
                                     
-                                    <controls:LabeledControl Text="Bool ComboBox">
+                                    <controls:LabeledControl Text="ComboBox with Bool Converter">
                                         <ComboBox 
                                             SelectedItem="{Binding Boolean, Converter={StaticResource BoolToStringConverter}}"
                                             ItemsSource="{x:Static tools:BoolToStringConverter.ItemsSource}"
@@ -89,7 +89,7 @@
                                         ></ComboBox>
                                     </controls:LabeledControl>
                                         
-                                    <controls:LabeledControl Text="Nullable Bool ComboBox">
+                                    <controls:LabeledControl Text="ComboBox with Nullable Bool Converter">
                                         <ComboBox 
                                             SelectedItem="{Binding NullableBoolean, Converter={StaticResource NullableBoolToStringConverter}}"
                                             ItemsSource="{x:Static tools:NullableBoolToStringConverter.ItemsSource}"

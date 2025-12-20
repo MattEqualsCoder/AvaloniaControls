@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using Avalonia.Controls;
-using AvaloniaControls.ControlServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AvaloniaControls.Services;

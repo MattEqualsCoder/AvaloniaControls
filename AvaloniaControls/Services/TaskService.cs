@@ -8,9 +8,7 @@ namespace AvaloniaControls.Services;
 
 public class TaskService : ITaskService
 {
-   
-    
-    private ILogger<TaskService> _logger;
+    private readonly ILogger<TaskService> _logger;
     
     public TaskService(ILogger<TaskService> logger)
     {

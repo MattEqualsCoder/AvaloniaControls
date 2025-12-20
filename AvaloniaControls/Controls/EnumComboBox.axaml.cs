@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using AvaloniaControls.Extensions;
 using AvaloniaControls.Models;
 
 namespace AvaloniaControls.Controls;

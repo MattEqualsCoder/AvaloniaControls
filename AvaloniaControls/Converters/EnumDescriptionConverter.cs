@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Avalonia.Data.Converters;
+using AvaloniaControls.Extensions;
 
 namespace AvaloniaControls.Converters;
 

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using AvaloniaControls.ControlServices;
+using Avalonia.Input.Platform;
 using AvaloniaControls.Services;
 
 namespace AvaloniaControls.Extensions;
@@ -19,7 +19,7 @@ public static class ControlExtensions
 
     public static Task<string?> GetClipboardAsync(this Control control)
     {
-        return TopLevel.GetTopLevel(control)?.Clipboard?.GetTextAsync() ?? Task.FromResult<string?>(null);
+        return TopLevel.GetTopLevel(control)?.Clipboard?.TryGetTextAsync() ?? Task.FromResult<string?>(null);
     }
     
     public static Task SetClipboardAsync(this Control control, string? text)

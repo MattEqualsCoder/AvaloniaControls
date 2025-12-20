@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
-using AvaloniaControls.ControlServices;
 
 namespace AvaloniaControls.Services;
 

@@ -1,11 +1,6 @@
 namespace AvaloniaControls;
 
-public class FileControlUpdatedEventArgs
+public class FileControlUpdatedEventArgs(string? path)
 {
-    public string? Path { get; set; }
-
-    public FileControlUpdatedEventArgs(string? path)
-    {
-        Path = path;
-    }
+    public string? Path { get; set; } = path;
 }

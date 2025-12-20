@@ -1,9 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using AvaloniaControls.Models;
 
 namespace AvaloniaControls.Controls;

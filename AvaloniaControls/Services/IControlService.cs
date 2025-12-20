@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace AvaloniaControls.ControlServices;
+namespace AvaloniaControls.Services;
 
 public abstract class ControlService
 {

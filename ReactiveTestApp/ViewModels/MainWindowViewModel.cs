@@ -2,55 +2,61 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using AvaloniaControls.Controls;
 using AvaloniaControls.Models;
 using ReactiveUI.SourceGenerators;
 
 namespace ReactiveTestApp.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase
 {
 #pragma warning disable CA1822 // Mark members as static
     public string Greeting => "Welcome to Avalonia!";
 #pragma warning restore CA1822 // Mark members as static
 
-    [Reactive] public string TestString { get; set; } = "Test Value";
+    [Reactive] public partial string TestString { get; set; }
 
-    [Reactive] public double Scale { get; set; }
+    [Reactive] public partial double Scale { get; set; }
 
-    [Reactive] public string TestPath { get; set; } = "";
+    [Reactive] public partial string TestPath { get; set; } 
 
-    [Reactive] public string FolderPath { get; set; } = "";
+    [Reactive] public partial string FolderPath { get; set; }
     
-    [Reactive] public bool Boolean { get; set; }
+    [Reactive] public partial bool Boolean { get; set; }
     
-    [Reactive] public bool? NullableBoolean { get; set; }
+    [Reactive] public partial bool? NullableBoolean { get; set; }
     
-    [Reactive] public TestEnums TestEnum { get; set; }
+    [Reactive] public partial TestEnums TestEnum { get; set; }
 
-    [Reactive] public TestEnums TestEnum2 { get; set; } = TestEnums.ValueThree;
+    [Reactive] public partial TestEnums TestEnum2 { get; set; }
 
-    [Reactive, ReactiveLinkedProperties(nameof(NullableBoolComboBoxValueText))] public bool? NullableBoolComboBoxValue { get; set; } = true;
+    [Reactive, ReactiveLinkedProperties(nameof(NullableBoolComboBoxValueText))]
+    public partial bool? NullableBoolComboBoxValue { get; set; }
 
     public string NullableBoolComboBoxValueText => NullableBoolComboBoxValue == null
         ? "null"
         : NullableBoolComboBoxValue.ToString() ?? "Unknown";
     
-    [Reactive, ReactiveLinkedProperties(nameof(BoolComboBoxValueText))] public bool BoolComboBoxValue { get; set; }
+    [Reactive, ReactiveLinkedProperties(nameof(BoolComboBoxValueText))] 
+    public partial bool BoolComboBoxValue { get; set; }
+    
     public string BoolComboBoxValueText => BoolComboBoxValue.ToString() ?? "Unknown";
     
-    [Reactive] public int TimeInSeconds { get; set; }
+    [Reactive] 
+    public partial int TimeInSeconds { get; set; }
     
-    [Reactive] public int ValueNoScroll { get; set; }
+    [Reactive] 
+    public partial int ValueNoScroll { get; set; }
     
-    [Reactive] public double NumericTextBoxDouble { get; set; }
+    [Reactive] 
+    public partial double NumericTextBoxDouble { get; set; }
     
-    [Reactive] public int NumericTextBoxInt { get; set; }
-    
-    [Reactive] public int NumericTextBoxTime { get; set; }
-
     [Reactive]
-    public List<ComboBoxAndSearchItem> SearchItems { get; set; } =
+    public partial int NumericTextBoxInt { get; set; }
+    
+    [Reactive]
+    public partial int NumericTextBoxTime { get; set; }
+
+    public List<ComboBoxAndSearchItem> SearchItems { get; } =
     [
         new ComboBoxAndSearchItem(1, "Item 1", "Item 1 Description"),
         new ComboBoxAndSearchItem(2, "Option 2", "Option 2 Description"),
@@ -58,21 +64,24 @@ public class MainWindowViewModel : ViewModelBase
         new ComboBoxAndSearchItem(4)
     ];
 
-    [Reactive] public List<string> SearchItemsText { get; set; } = [];
+    [Reactive] 
+    public partial List<string> SearchItemsText { get; set; }
 
-    [Reactive] public string SelectedDisplay { get; set; } = "";
+    [Reactive] 
+    public partial string SelectedDisplay { get; set; }
 
-    [Reactive] public int SelectedValue { get; set; } = 2;
+    [Reactive] 
+    public partial int SelectedValue { get; set; }
 
     [Reactive]
     [ReactiveLinkedProperties(nameof(MessageBoxResultDisplayText))]
-    public string? MessageBoxResult { get; set; }
+    public partial string? MessageBoxResult { get; set; }
 
     public List<string> LinkedEventDropdown => ["Option 1", "Option 2", "Option 3"];
 
     [Reactive]
     [ReactiveLinkedEvent(nameof(OnLinkedEventSelection))]
-    public string LinkedEventSelection { get; set; } = "";
+    public partial string LinkedEventSelection { get; set; }
 
 #pragma warning disable CS0067 // Mark members as static
     public event EventHandler? OnLinkedEventSelection; 
@@ -84,11 +93,25 @@ public class MainWindowViewModel : ViewModelBase
 
     public Func<Enum?, bool> FilterEnum => a => a != null && (TestEnums)a is TestEnums.ValueOne or TestEnums.ValueTwo;
 
-    [Reactive] public bool CheckboxTest { get; set; } = true;
+    [Reactive] 
+    public partial bool CheckboxTest { get; set; }
 
-    [Reactive] public bool? NullableCheckboxTest { get; set; }
+    [Reactive]
+    public partial bool? NullableCheckboxTest { get; set; }
     
-    [Reactive] public bool MenuItemCheckboxTest { get; set; }
+    [Reactive]
+    public partial bool MenuItemCheckboxTest { get; set; }
+
+    public MainWindowViewModel()
+    {
+        TestString = "Hello World";
+        TestPath = string.Empty;
+        FolderPath = string.Empty;
+        SearchItemsText = [];
+        SelectedDisplay = string.Empty;
+        LinkedEventSelection = LinkedEventDropdown.Last();
+        TestEnum2 = TestEnums.ValueTwo;
+    }
 }
 
 public enum TestEnums

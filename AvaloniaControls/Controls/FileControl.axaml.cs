@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
@@ -167,11 +168,11 @@ public partial class FileControl : UserControl
 
     public event EventHandler<FileControlUpdatedEventArgs>? OnUpdated;
 
-    private static string? PreviousFolder;
+    private static string? _previousFolder;
     
     private void DropFile(object? sender, DragEventArgs e)
     {
-        var file = e.Data?.GetFiles()?.FirstOrDefault();
+        var file = e.DataTransfer.TryGetFiles()?.FirstOrDefault();
         if (file == null)
         {
             return;
@@ -247,9 +248,9 @@ public partial class FileControl : UserControl
             {
                 locationPath = DefaultPath;
             }
-            else if (!string.IsNullOrEmpty(PreviousFolder))
+            else if (!string.IsNullOrEmpty(_previousFolder))
             {
-                locationPath = PreviousFolder;
+                locationPath = _previousFolder;
             }
             else
             {
@@ -267,7 +268,7 @@ public partial class FileControl : UserControl
         
         if (selectedPath is IStorageFile selectedFile)
         {
-            PreviousFolder = (await selectedFile.GetParentAsync())?.TryGetLocalPath();
+            _previousFolder = (await selectedFile.GetParentAsync())?.TryGetLocalPath();
             var path = selectedFile.TryGetLocalPath();
             if (await VerifyHashAsync(path ?? "") == false)
             {
@@ -277,8 +278,8 @@ public partial class FileControl : UserControl
         }
         else if (selectedPath is IStorageFolder selectedFolder)
         {
-            PreviousFolder = selectedFolder.TryGetLocalPath();
-            FilePath = PreviousFolder;
+            _previousFolder = selectedFolder.TryGetLocalPath();
+            FilePath = _previousFolder;
         }
         
         OnUpdated?.Invoke(this, new FileControlUpdatedEventArgs(FilePath!));
@@ -385,8 +386,8 @@ public partial class FileControl : UserControl
             {
                 return;
             }
-            
-            var text = await topLevel.GetClipboardAsync() ?? await topLevel.Clipboard.GetTextAsync() ?? "";
+
+            var text = await topLevel.GetClipboardAsync() ?? await topLevel.Clipboard.TryGetTextAsync() ?? "";
             if (text.StartsWith('"') && text.EndsWith('"'))
             {
                 text = text.Substring(1, text.Length - 2);
